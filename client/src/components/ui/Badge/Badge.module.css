@@ -1,0 +1,69 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.sm {
+  padding: 3px 8px;
+  font-size: 0.68rem;
+}
+
+.md {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+}
+
+/* Estados */
+.active {
+  background-color: var(--status-active-bg);
+  color: var(--status-active-text);
+  border: 1px solid var(--status-active-border);
+}
+
+.paused {
+  background-color: var(--status-paused-bg);
+  color: var(--status-paused-text);
+  border: 1px solid var(--status-paused-border);
+}
+
+.sold {
+  background-color: var(--status-sold-bg);
+  color: var(--status-sold-text);
+  border: 1px solid var(--status-sold-border);
+}
+
+.rented {
+  background-color: var(--status-rented-bg);
+  color: var(--status-rented-text);
+  border: 1px solid var(--status-rented-border);
+}
+
+.sale {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.rent {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.featured {
+  background-color: var(--color-gold-soft);
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.default {
+  background-color: var(--bg-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
