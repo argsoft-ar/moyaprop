@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { Home, PlusCircle, LayoutDashboard, LogOut, ExternalLink, ShieldCheck } from 'lucide-react';
+import { PlusCircle, LayoutDashboard, LogOut, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../../features/auth/context/AuthContext';
+import { Logo } from '../../ui/Logo/Logo';
 import styles from './AdminLayout.module.css';
 
 export const AdminLayout: React.FC = () => {
@@ -21,15 +22,7 @@ export const AdminLayout: React.FC = () => {
       {/* Sidebar Lateral */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <div className={styles.brand}>
-            <div className={styles.logoIcon}>
-              <Home size={20} />
-            </div>
-            <div className={styles.brandInfo}>
-              <span className={styles.brandTitle}>MOYA<span className={styles.accent}>PROP</span></span>
-              <span className={styles.brandSubtitle}>Panel de Control</span>
-            </div>
-          </div>
+          <Logo theme="dark" size="sm" />
         </div>
 
         <div className={styles.userProfile}>

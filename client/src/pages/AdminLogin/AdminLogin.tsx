@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Home, Lock, Mail, ShieldAlert, ArrowLeft } from 'lucide-react';
 import { authService } from '../../features/auth/services/authService';
 import { useAuth } from '../../features/auth/context/AuthContext';
+import { Logo } from '../../components/ui/Logo/Logo';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import styles from './AdminLogin.module.css';
@@ -56,10 +57,7 @@ export const AdminLogin: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <div className={styles.logoIcon}>
-            <Home size={28} />
-          </div>
-          <h1 className={styles.title}>MOYA<span className={styles.highlight}>PROP</span></h1>
+          <Logo size="lg" />
           <p className={styles.subtitle}>Panel de Administración Exclusivo</p>
         </div>
 
