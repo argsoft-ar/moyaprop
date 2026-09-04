@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { UploadService } from '../services/upload.service.js';
 import { env } from '../config/env.js';
 
+import fs from 'fs';
+import path from 'path';
+
 export class UploadController {
   static async uploadImages(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -15,23 +18,40 @@ export class UploadController {
         return;
       }
 
-      // Si no están configuradas las credenciales de Cloudinary (por ejemplo, en desarrollo inicial)
+      // Si no están configuradas las credenciales de Cloudinary, guardar físicamente en disco local
       if (!env.CLOUDINARY_CLOUD_NAME || !env.CLOUDINARY_API_KEY) {
-        const mockResults = files.map((file, idx) => ({
-          url: `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80`,
-          publicId: `mock_${Date.now()}_${idx}`,
-          order: idx,
-          isCover: idx === 0
-        }));
+        const uploadDir = path.join(process.cwd(), 'uploads');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        const host = req.get('host') || `localhost:${env.PORT}`;
+        const protocol = req.protocol;
+
+        const localResults = files.map((file, idx) => {
+          const ext = path.extname(file.originalname) || '.jpg';
+          const filename = `${Date.now()}_${Math.round(Math.random() * 1e9)}${ext}`;
+          const filePath = path.join(uploadDir, filename);
+
+          fs.writeFileSync(filePath, file.buffer);
+
+          return {
+            url: `${protocol}://${host}/uploads/${filename}`,
+            publicId: `local_${filename}`,
+            order: idx,
+            isCover: idx === 0
+          };
+        });
 
         res.status(200).json({
           success: true,
-          message: 'Imágenes procesadas (Modo Simulación / Dev)',
-          data: mockResults
+          message: `${localResults.length} imagen(es) guardada(s) localmente`,
+          data: localResults
         });
         return;
       }
 
+      // Si Cloudinary está configurado, subir a la nube
       const uploadPromises = files.map((file, index) =>
         UploadService.uploadImage(file.buffer).then((res) => ({
           url: res.url,
@@ -45,7 +65,7 @@ export class UploadController {
 
       res.status(200).json({
         success: true,
-        message: `${results.length} imagen(es) subida(s) con éxito`,
+        message: `${results.length} imagen(es) subida(s) con éxito a Cloudinary`,
         data: results
       });
     } catch (error) {
@@ -56,6 +76,20 @@ export class UploadController {
   static async deleteImage(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const publicId = req.params.publicId as string;
+
+      if (publicId.startsWith('local_')) {
+        const filename = publicId.replace('local_', '');
+        const filePath = path.join(process.cwd(), 'uploads', filename);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+        res.status(200).json({
+          success: true,
+          message: 'Imagen local eliminada'
+        });
+        return;
+      }
+
       await UploadService.deleteImage(publicId);
       res.status(200).json({
         success: true,

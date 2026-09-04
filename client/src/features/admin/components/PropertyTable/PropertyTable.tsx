@@ -55,17 +55,19 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
 
             return (
               <tr key={p.id}>
-                <td className={styles.propertyCol}>
-                  <div className={styles.thumbWrapper}>
-                    {cover ? (
-                      <img src={cover} alt={p.title} className={styles.thumb} />
-                    ) : (
-                      <div className={styles.noThumb}>Sin foto</div>
-                    )}
-                  </div>
-                  <div className={styles.infoWrapper}>
-                    <span className={styles.title} title={p.title}>{p.title}</span>
-                    <span className={styles.metaText}>{p.bedrooms} dorm. • {p.totalArea} m²</span>
+                <td>
+                  <div className={styles.propertyCell}>
+                    <div className={styles.thumbWrapper}>
+                      {cover ? (
+                        <img src={cover} alt={p.title} className={styles.thumb} />
+                      ) : (
+                        <div className={styles.noThumb}>Sin foto</div>
+                      )}
+                    </div>
+                    <div className={styles.infoWrapper}>
+                      <span className={styles.title} title={p.title}>{p.title}</span>
+                      <span className={styles.metaText}>{p.bedrooms} dorm. • {p.totalArea} m²</span>
+                    </div>
                   </div>
                 </td>
 
@@ -82,9 +84,11 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
                   <strong>{formatPrice(p.price, p.currency)}</strong>
                 </td>
 
-                <td className={styles.locationCol}>
-                  <span>{p.city}</span>
-                  <small className={styles.addressText}>{p.address}</small>
+                <td>
+                  <div className={styles.locationCell}>
+                    <span>{p.city}</span>
+                    <small className={styles.addressText}>{p.address}</small>
+                  </div>
                 </td>
 
                 <td>
@@ -100,30 +104,32 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
                   </select>
                 </td>
 
-                <td className={styles.actionsCol}>
-                  <a
-                    href={`/propiedad/${p.id}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.actionBtn}
-                    title="Ver en web pública"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
-                  <button
-                    className={styles.actionBtn}
-                    onClick={() => onEdit(p)}
-                    title="Editar propiedad"
-                  >
-                    <Edit2 size={16} />
-                  </button>
-                  <button
-                    className={`${styles.actionBtn} ${styles.deleteBtn}`}
-                    onClick={() => onDelete(p.id, p.title)}
-                    title="Eliminar propiedad"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                <td>
+                  <div className={styles.actionsCell}>
+                    <a
+                      href={`/propiedad/${p.id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.actionBtn}
+                      title="Ver en web pública"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                    <button
+                      className={styles.actionBtn}
+                      onClick={() => onEdit(p)}
+                      title="Editar propiedad"
+                    >
+                      <Edit2 size={16} />
+                    </button>
+                    <button
+                      className={`${styles.actionBtn} ${styles.deleteBtn}`}
+                      onClick={() => onDelete(p.id, p.title)}
+                      title="Eliminar propiedad"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             );
