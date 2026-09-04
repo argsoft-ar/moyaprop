@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Shield } from 'lucide-react';
+import { Home as HomeIcon, Menu, X, Shield, Phone } from 'lucide-react';
 import { useAuth } from '../../../features/auth/context/AuthContext';
-import { Logo } from '../../ui/Logo/Logo';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
@@ -19,7 +18,13 @@ export const Navbar: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link to="/" className={styles.brand} onClick={closeMobileMenu}>
-          <Logo size="md" />
+          <div className={styles.logoIcon}>
+            <HomeIcon size={22} />
+          </div>
+          <div className={styles.brandText}>
+            <span className={styles.brandName}>MOYA<span className={styles.brandHighlight}>PROP</span></span>
+            <span className={styles.brandTagline}>Servicios Inmobiliarios</span>
+          </div>
         </Link>
 
         {/* Navegación Desktop */}

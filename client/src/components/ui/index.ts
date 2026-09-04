@@ -4,4 +4,3 @@ export * from './Select';
 export * from './Badge';
 export * from './Spinner';
 export * from './Modal';
-export * from './Logo/Logo';

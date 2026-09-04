@@ -1,6 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
-import { Logo } from '../../ui/Logo/Logo';
+import { Home, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
@@ -14,7 +13,10 @@ export const Footer: React.FC = () => {
           {/* Marca y Propósito */}
           <div className={styles.brandCol}>
             <div className={styles.brand}>
-              <Logo theme="dark" size="md" />
+              <div className={styles.logoIcon}>
+                <Home size={20} />
+              </div>
+              <span className={styles.brandName}>MOYA<span className={styles.brandHighlight}>PROP</span></span>
             </div>
             <p className={styles.description}>
               Compromiso, transparencia y asesoramiento inmobiliario personalizado. Ayudamos a encontrar el hogar y la inversión ideal para cada familia.
