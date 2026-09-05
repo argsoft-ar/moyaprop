@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 10px var(--color-accent-glow);
 }
 
 .brandText {
@@ -112,12 +112,12 @@
   font-size: 0.85rem;
   font-weight: 600;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  border: 1px solid var(--color-accent-border);
   transition: all var(--transition-fast);
 }
 
 .adminBadge:hover {
-  background-color: #dbeafe;
+  background-color: #ffedd5;
 }
 
 .adminLoginLink {

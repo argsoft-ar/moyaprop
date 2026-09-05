@@ -35,24 +35,24 @@
 
 /* Variantes */
 .primary {
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
+  background-color: var(--color-accent);
+  color: #ffffff;
   box-shadow: var(--shadow-sm);
 }
 
 .primary:hover:not(:disabled) {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-accent-hover);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 14px var(--color-accent-glow);
 }
 
 .secondary {
-  background-color: var(--color-accent);
-  color: var(--text-inverse);
+  background-color: var(--color-primary);
+  color: #ffffff;
 }
 
 .secondary:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
+  background-color: var(--color-primary-light);
   transform: translateY(-1px);
 }
 

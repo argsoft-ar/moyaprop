@@ -87,7 +87,7 @@
 .price {
   font-size: 1.4rem;
   font-weight: 800;
-  color: var(--color-primary);
+  color: var(--color-accent);
   line-height: 1.1;
 }
 
@@ -149,4 +149,8 @@
   align-items: center;
   gap: 6px;
   color: var(--text-secondary);
+}
+
+.featureItem svg {
+  color: var(--color-accent);
 }

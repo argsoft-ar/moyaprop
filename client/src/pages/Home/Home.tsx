@@ -6,6 +6,8 @@ import { PropertyFilters } from '../../features/properties/components/PropertyFi
 import { PropertyGrid } from '../../features/properties/components/PropertyGrid/PropertyGrid';
 import { Navbar } from '../../components/layout/Navbar/Navbar';
 import { Footer } from '../../components/layout/Footer/Footer';
+import { AboutSection } from '../../components/sections/AboutSection/AboutSection';
+import { ContactSection } from '../../components/sections/ContactSection/ContactSection';
 import { Sparkles, Building2, ShieldCheck, HeartHandshake } from 'lucide-react';
 import styles from './Home.module.css';
 
@@ -52,7 +54,6 @@ export const Home: React.FC = () => {
 
   const handleFilterChange = (newFilters: FilterType) => {
     setFilters(newFilters);
-    // Actualizar URL
     const params: Record<string, string> = {};
     if (newFilters.operationType) params.operationType = newFilters.operationType;
     setSearchParams(params);
@@ -72,7 +73,7 @@ export const Home: React.FC = () => {
         <div className={styles.heroContainer}>
           <div className={styles.heroBadge}>
             <Sparkles size={16} />
-            <span>MoyaProp • Inmobiliaria Autogestionable</span>
+            <span>MoyaProp • Construyendo confianza en la gestión</span>
           </div>
           <h1 className={styles.heroTitle}>
             Tu próximo hogar comienza con una decisión inteligente.
@@ -83,8 +84,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Catálogo y Buscador */}
-      <main className={styles.mainSection}>
+      {/* Catálogo y Buscador de Propiedades */}
+      <main className={styles.mainSection} id="propiedades">
         <div className={styles.container}>
           <PropertyFilters
             filters={filters}
@@ -94,7 +95,7 @@ export const Home: React.FC = () => {
 
           <div className={styles.catalogHeader}>
             <h2 className={styles.sectionTitle}>
-              Propiedades Disponibles ({meta.total})
+              Catálogo de Propiedades ({meta.total})
             </h2>
             <span className={styles.liveIndicator}>Actualizado en tiempo real</span>
           </div>
@@ -127,9 +128,16 @@ export const Home: React.FC = () => {
               </button>
             </div>
           )}
+        </div>
+      </main>
 
-          {/* Beneficios MoyaProp */}
-          <section className={styles.featuresSection}>
+      {/* Nueva Sección: Nosotros */}
+      <AboutSection />
+
+      {/* Beneficios y Valores MoyaProp */}
+      <section className={styles.valuesSection}>
+        <div className={styles.container}>
+          <div className={styles.featuresSection}>
             <div className={styles.featureBox}>
               <div className={styles.featureIcon}><Building2 size={24} /></div>
               <h3>Tasaciones Reales</h3>
@@ -145,9 +153,12 @@ export const Home: React.FC = () => {
               <h3>Atención Directa</h3>
               <p>Trato personal y directo con la familia Moya, sin intermediarios ni demoras.</p>
             </div>
-          </section>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Nueva Sección: Contacto */}
+      <ContactSection />
 
       <Footer />
     </div>

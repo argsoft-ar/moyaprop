@@ -1,65 +1,91 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Home as HomeIcon, Menu, X, Shield, Phone } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Home as HomeIcon, Menu, X, Shield } from 'lucide-react';
 import { useAuth } from '../../../features/auth/context/AuthContext';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { user } = useAuth();
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  const isActive = (path: string) => location.pathname === path;
+  const handleNavClick = (targetId?: string) => {
+    closeMobileMenu();
+
+    if (!targetId) {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
+      return;
+    }
+
+    if (location.pathname === '/') {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(`/#${targetId}`);
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link to="/" className={styles.brand} onClick={closeMobileMenu}>
+        <Link to="/" className={styles.brand} onClick={() => handleNavClick()}>
           <div className={styles.logoIcon}>
             <HomeIcon size={22} />
           </div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>MOYA<span className={styles.brandHighlight}>PROP</span></span>
-            <span className={styles.brandTagline}>Servicios Inmobiliarios</span>
           </div>
         </Link>
 
         {/* Navegación Desktop */}
         <nav className={styles.navDesktop}>
-          <Link
-            to="/"
-            className={`${styles.navLink} ${isActive('/') && !location.search ? styles.active : ''}`}
+          <button
+            type="button"
+            className={`${styles.navLink} ${location.pathname === '/' && !location.hash ? styles.active : ''}`}
+            onClick={() => handleNavClick()}
           >
             Inicio
-          </Link>
-          <Link
-            to="/?operationType=VENTA"
-            className={`${styles.navLink} ${location.search.includes('VENTA') ? styles.active : ''}`}
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.navLink} ${location.hash === '#propiedades' ? styles.active : ''}`}
+            onClick={() => handleNavClick('propiedades')}
           >
-            Comprar
-          </Link>
-          <Link
-            to="/?operationType=ALQUILER"
-            className={`${styles.navLink} ${location.search.includes('ALQUILER') ? styles.active : ''}`}
+            Propiedades
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.navLink} ${location.hash === '#nosotros' ? styles.active : ''}`}
+            onClick={() => handleNavClick('nosotros')}
           >
-            Alquilar
-          </Link>
-          <a
-            href="#contacto"
-            className={styles.navLink}
-            onClick={(e) => {
-              if (location.pathname !== '/') {
-                return; // Dejar navegar normal si no está en home
-              }
-              e.preventDefault();
-              document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            Nosotros
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.navLink} ${location.hash === '#contacto' ? styles.active : ''}`}
+            onClick={() => handleNavClick('contacto')}
           >
             Contacto
-          </a>
+          </button>
         </nav>
 
         {/* Botón de Acceso Admin */}
@@ -90,18 +116,38 @@ export const Navbar: React.FC = () => {
       {/* Menú Desplegable Móvil */}
       {mobileMenuOpen && (
         <div className={styles.mobileMenu}>
-          <Link to="/" className={styles.mobileNavLink} onClick={closeMobileMenu}>
+          <button
+            type="button"
+            className={styles.mobileNavLink}
+            onClick={() => handleNavClick()}
+          >
             Inicio
-          </Link>
-          <Link to="/?operationType=VENTA" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-            Propiedades en Venta
-          </Link>
-          <Link to="/?operationType=ALQUILER" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-            Propiedades en Alquiler
-          </Link>
-          <a href="#contacto" className={styles.mobileNavLink} onClick={closeMobileMenu}>
-            Contacto y Ubicación
-          </a>
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileNavLink}
+            onClick={() => handleNavClick('propiedades')}
+          >
+            Propiedades
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileNavLink}
+            onClick={() => handleNavClick('nosotros')}
+          >
+            Nosotros
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileNavLink}
+            onClick={() => handleNavClick('contacto')}
+          >
+            Contacto
+          </button>
+
           <div className={styles.mobileDivider} />
           {user ? (
             <Link to="/admin" className={styles.mobileAdminLink} onClick={closeMobileMenu}>

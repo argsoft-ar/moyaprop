@@ -16,6 +16,8 @@ import { AdminDashboard } from './pages/AdminDashboard/AdminDashboard';
 import { AdminPropertyCreate } from './pages/AdminPropertyCreate/AdminPropertyCreate';
 import { AdminPropertyEdit } from './pages/AdminPropertyEdit/AdminPropertyEdit';
 
+import { FloatingWhatsApp } from './components/ui/FloatingWhatsApp';
+
 export const App: React.FC = () => {
   return (
     <AuthProvider>
@@ -40,6 +42,9 @@ export const App: React.FC = () => {
           {/* Redirección por defecto */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+
+        {/* Botón Flotante de WhatsApp para visitantes (se oculta en panel admin) */}
+        <FloatingWhatsApp />
       </BrowserRouter>
     </AuthProvider>
   );

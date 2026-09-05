@@ -1,15 +1,44 @@
 :root {
-  /* Paleta de Colores - MoyaProp */
-  --color-primary: #0f172a;        /* Azul noche profundo */
-  --color-primary-light: #1e293b;  /* Azul noche secundario */
-  --color-primary-hover: #334155;
-  
-  --color-accent: #2563eb;         /* Azul royal inmobiliario */
-  --color-accent-hover: #1d4ed8;
-  --color-accent-soft: #eff6ff;
-  
-  --color-gold: #d97706;           /* Acento dorado para destacados */
-  --color-gold-soft: #fef3c7;
+  /* ===================================================
+     Identidad Visual MoyaProp
+     Paleta Oficial:
+     - Naranja Corporativo (Acento / CTA): #F26522
+     - Gris Oscuro (Texto y Detalles):     #2D2D2D
+     - Blanco (Fondo Principal):            #FFFFFF
+     - Gris Claro (Interfaz y Tarjetas):    #F5F5F5
+     =================================================== */
+
+  /* 1. Naranja Corporativo (Color de Acento & Llamadas a la Acción) */
+  --color-accent: #F26522;
+  --color-accent-hover: #d85416;
+  --color-accent-active: #bf450e;
+  --color-accent-soft: #fff7ed;
+  --color-accent-border: #fed7aa;
+  --color-accent-glow: rgba(242, 101, 34, 0.25);
+
+  /* 2. Gris Oscuro (Texto, Encabezados, Sidebar y Footer) */
+  --color-primary: #2D2D2D;
+  --color-primary-light: #3D3D3D;
+  --color-primary-hover: #1A1A1A;
+
+  /* 3. Fondos (Blanco y Gris Claro para Interfaz) */
+  --bg-main: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F5F5F5;
+  --bg-subtle: #FAFAFA;
+
+  /* 4. Textos */
+  --text-main: #2D2D2D;
+  --text-secondary: #5A5A5A;
+  --text-muted: #8E8E8E;
+  --text-inverse: #FFFFFF;
+
+  /* Bordes */
+  --border-subtle: #E8E8E8;
+  --border-strong: #D1D1D1;
+  --border-focus: #F26522;
 
   /* Estados de Inmuebles */
   --status-active-bg: #ecfdf5;
@@ -34,27 +63,8 @@
   --color-error: #ef4444;
   --color-error-soft: #fef2f2;
 
-  /* Superficies y Fondos */
-  --bg-main: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: #ffffff;
-  --bg-hover: #f1f5f9;
-  --bg-subtle: #f8fafc;
-
-  /* Bordes */
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #2563eb;
-
-  /* Textos */
-  --text-main: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
-
   /* Tipografía */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Espaciado */
   --spacing-xs: 4px;
@@ -67,17 +77,17 @@
   /* Bordes Redondeados */
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Sombras */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.06);
-  --shadow-card-hover: 0 12px 24px rgba(15, 23, 42, 0.12);
+  /* Sombras Suaves */
+  --shadow-sm: 0 1px 2px rgba(45, 45, 45, 0.05);
+  --shadow-md: 0 4px 12px rgba(45, 45, 45, 0.08);
+  --shadow-lg: 0 10px 24px rgba(45, 45, 45, 0.1);
+  --shadow-xl: 0 20px 32px rgba(45, 45, 45, 0.12);
+  --shadow-card: 0 2px 8px rgba(45, 45, 45, 0.06);
+  --shadow-card-hover: 0 10px 20px rgba(242, 101, 34, 0.15);
 
   /* Transiciones */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);

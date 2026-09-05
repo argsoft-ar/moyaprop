@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Home, Phone, Mail, MapPin, MessageCircle, Sparkles } from 'lucide-react';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer} id="contacto">
+    <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* Marca y Propósito */}
@@ -18,8 +18,9 @@ export const Footer: React.FC = () => {
               </div>
               <span className={styles.brandName}>MOYA<span className={styles.brandHighlight}>PROP</span></span>
             </div>
+            <p className={styles.sloganLine}>«Construyendo confianza en la gestión»</p>
             <p className={styles.description}>
-              Compromiso, transparencia y asesoramiento inmobiliario personalizado. Ayudamos a encontrar el hogar y la inversión ideal para cada familia.
+              Empresa familiar con vasta experiencia en el mercado inmobiliario de la zona sur del Gran Buenos Aires. Brindamos todas las alternativas para culminar tu operación con éxito y total seguridad.
             </p>
           </div>
 
@@ -28,18 +29,19 @@ export const Footer: React.FC = () => {
             <h4 className={styles.colTitle}>Navegación</h4>
             <ul className={styles.linkList}>
               <li><a href="/">Inicio</a></li>
-              <li><a href="/?operationType=VENTA">Propiedades en Venta</a></li>
-              <li><a href="/?operationType=ALQUILER">Propiedades en Alquiler</a></li>
-              <li><a href="/admin/login">Acceso Clientes / Admin</a></li>
+              <li><a href="/#propiedades">Catálogo de Propiedades</a></li>
+              <li><a href="/#nosotros">Sobre Nosotros</a></li>
+              <li><a href="/#contacto">Canales de Contacto</a></li>
+              <li><a href="/admin/login">Acceso Exclusivo Administración</a></li>
             </ul>
           </div>
 
           {/* Contacto Directo */}
           <div className={styles.contactCol}>
-            <h4 className={styles.colTitle}>Contacto</h4>
+            <h4 className={styles.colTitle}>Contacto Directo</h4>
             <div className={styles.contactItem}>
               <MapPin size={18} className={styles.contactIcon} />
-              <span>Zona Norte y Alrededores, Buenos Aires</span>
+              <span>Zona Sur del Gran Buenos Aires y Alrededores</span>
             </div>
             <div className={styles.contactItem}>
               <Phone size={18} className={styles.contactIcon} />
@@ -56,14 +58,14 @@ export const Footer: React.FC = () => {
               className={styles.whatsappButton}
             >
               <MessageCircle size={18} />
-              <span>Consultar por WhatsApp</span>
+              <span>Escríbenos por WhatsApp</span>
             </a>
           </div>
         </div>
 
         <div className={styles.bottomBar}>
           <p>© {currentYear} MoyaProp. Todos los derechos reservados.</p>
-          <p className={styles.developedBy}>Plataforma Inmobiliaria Autogestionable</p>
+          <p className={styles.developedBy}>Construyendo confianza en la gestión</p>
         </div>
       </div>
     </footer>
