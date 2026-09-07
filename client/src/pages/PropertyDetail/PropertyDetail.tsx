@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { propertyService } from '../../features/properties/services/propertyService';
 import { Property } from '../../types/property.types';
 import { PropertyGallery } from '../../features/properties/components/PropertyGallery/PropertyGallery';
+import { PropertyMap } from '../../features/properties/components/PropertyMap';
 import { Navbar } from '../../components/layout/Navbar/Navbar';
 import { Footer } from '../../components/layout/Footer/Footer';
 import { Spinner } from '../../components/ui/Spinner';
@@ -208,6 +209,14 @@ export const PropertyDetail: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Mapa de Ubicación Google Maps */}
+              <PropertyMap
+                address={property.address}
+                city={property.city}
+                neighborhood={property.neighborhood}
+                title={property.title}
+              />
             </div>
 
             {/* Columna Derecha: Tarjeta de Precio y Contacto Fijo */}
