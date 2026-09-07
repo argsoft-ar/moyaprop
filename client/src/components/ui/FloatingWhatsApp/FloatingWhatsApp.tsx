@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './FloatingWhatsApp.module.css';
 
@@ -13,8 +13,8 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
 }) => {
   const location = useLocation();
 
-  // No mostrar el botón flotante si estamos dentro del panel de administración
-  if (location.pathname.startsWith('/admin')) {
+  // No mostrar el botón flotante si estamos dentro del panel de administración o en la hoja de impresión
+  if (location.pathname.startsWith('/admin') || location.pathname.includes('/imprimir')) {
     return null;
   }
 

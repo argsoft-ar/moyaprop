@@ -18,8 +18,8 @@ import {
   Calendar,
   MessageCircle,
   ArrowLeft,
-  Share2,
-  CheckCircle
+  Printer,
+  Info
 } from 'lucide-react';
 import styles from './PropertyDetail.module.css';
 
@@ -28,7 +28,6 @@ export const PropertyDetail: React.FC = () => {
   const [property, setProperty] = useState<Property | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
   const whatsappPhone = import.meta.env.VITE_WHATSAPP_PHONE || '5491112345678';
 
@@ -48,12 +47,6 @@ export const PropertyDetail: React.FC = () => {
 
     fetchProperty();
   }, [id]);
-
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 3000);
-  };
 
   if (isLoading) {
     return (
@@ -88,6 +81,12 @@ export const PropertyDetail: React.FC = () => {
   const isSale = property.operationType === 'VENTA';
   const whatsappUrl = buildWhatsAppUrl(whatsappPhone, property.title, window.location.href);
 
+  // Enlace para compartir la propiedad por WhatsApp a cualquier persona o grupo
+  const shareWhatsAppMessage = encodeURIComponent(
+    `¡Hola! Te comparto esta propiedad en MoyaProp:\n\n*${property.title}*\n📍 ${property.address}, ${property.city}\n💰 ${formatPrice(property.price, property.currency)}\n\n👉 Ver publicación completa:\n${window.location.href}`
+  );
+  const shareWhatsAppUrl = `https://api.whatsapp.com/send?text=${shareWhatsAppMessage}`;
+
   return (
     <div className={styles.page}>
       <Navbar />
@@ -101,19 +100,29 @@ export const PropertyDetail: React.FC = () => {
               <span>Volver a propiedades</span>
             </Link>
 
-            <button className={styles.shareButton} onClick={handleShare}>
-              {copiedLink ? (
-                <>
-                  <CheckCircle size={16} className={styles.shareSuccess} />
-                  <span>¡Enlace copiado!</span>
-                </>
-              ) : (
-                <>
-                  <Share2 size={16} />
-                  <span>Compartir</span>
-                </>
-              )}
-            </button>
+            <div className={styles.topActionsGroup}>
+              <Link
+                to={`/propiedad/${property.id}/imprimir`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.printActionBtn}
+                title="Abrir ficha resumida para imprimir o guardar en PDF"
+              >
+                <Printer size={17} />
+                <span>Imprimir Ficha</span>
+              </Link>
+
+              <a
+                href={shareWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.shareWhatsAppBtn}
+                title="Compartir esta propiedad por WhatsApp"
+              >
+                <MessageCircle size={17} />
+                <span>Compartir</span>
+              </a>
+            </div>
           </div>
 
           {/* Encabezado del Inmueble */}
@@ -217,6 +226,14 @@ export const PropertyDetail: React.FC = () => {
                 neighborhood={property.neighborhood}
                 title={property.title}
               />
+
+              {/* Cláusula Legal / Disclaimer */}
+              <div className={styles.legalDisclaimer}>
+                <Info size={16} className={styles.legalIcon} />
+                <p>
+                  Las imágenes publicadas no son necesariamente vinculantes ni tampoco contractuales. Las medidas enunciadas son aproximadas y han sido dadas al sólo hecho orientativo, las exactas surgirán del respectivo título, plano y/o plancheta catastral.
+                </p>
+              </div>
             </div>
 
             {/* Columna Derecha: Tarjeta de Precio y Contacto Fijo */}

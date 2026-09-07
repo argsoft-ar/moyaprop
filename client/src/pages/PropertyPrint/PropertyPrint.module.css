@@ -1,0 +1,426 @@
+/* Estilos en Pantalla (Preview) */
+.pageWrapper {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+
+.actionBar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.actionContent {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  background-color: #f26522;
+  color: #ffffff;
+  border: 1px solid #e05310;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(242, 101, 34, 0.3);
+}
+
+.printBtn:hover {
+  background-color: #e05310;
+  box-shadow: 0 4px 12px rgba(242, 101, 34, 0.4);
+}
+
+.printTip {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+/* Hoja A4 */
+.sheetContainer {
+  max-width: 820px;
+  margin: 24px auto 0;
+  background-color: #ffffff;
+  padding: 32px 36px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* 1. Encabezado Corporativo */
+.headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 2px solid #2d2d2d;
+  padding-bottom: 12px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logoText {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #2d2d2d;
+  line-height: 1;
+}
+
+.logoHighlight {
+  color: #f26522;
+}
+
+.logoSlogan {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  font-style: italic;
+}
+
+.contactCol {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contactAgent {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* 2. Bloque Principal: Imagen Cuadrada (Izquierda) + Detalles (Derecha) */
+.mainInfoGrid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Imagen Cuadrada */
+.squareImageWrapper {
+  width: 240px;
+  height: 240px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  flex-shrink: 0;
+}
+
+.squareImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Columna de Detalles */
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.detailsTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.badgeGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.badgeSale {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.badgeRent {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.badgeType {
+  background-color: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.referenceBadge {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 700;
+  background-color: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.priceBlock {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.priceLabel {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.priceValue {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #f26522;
+  line-height: 1.05;
+  margin: 2px 0 2px 0;
+}
+
+.expensesText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.titleLocationBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.propertyTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.propertyLocation {
+  font-size: 0.88rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Grilla de Características */
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.specLabel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.specVal {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+/* 3. Sección Descripción (Ancho Completo por debajo) */
+.descriptionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 14px;
+}
+
+.sectionHeading {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.descContent {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.descContent p {
+  margin: 0 0 8px 0;
+}
+
+.descContent p:last-child {
+  margin-bottom: 0;
+}
+
+/* Cláusula Legal */
+.legalDisclaimer {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #f26522;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-top: 4px;
+}
+
+.legalDisclaimer p {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #64748b;
+  margin: 0;
+  font-style: italic;
+}
+
+/* 4. Pie de Página */
+.sheetFooter {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 10px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+/* REGLAS PARA IMPRESIÓN (A4) */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .pageWrapper {
+    background-color: #ffffff !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  .actionBar {
+    display: none !important;
+  }
+
+  .sheetContainer {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    gap: 14px !important;
+  }
+
+  .headerRow,
+  .mainInfoGrid,
+  .legalDisclaimer {
+    page-break-inside: avoid;
+  }
+
+  .squareImageWrapper {
+    width: 210px !important;
+    height: 210px !important;
+  }
+
+  .mainInfoGrid {
+    grid-template-columns: 210px 1fr !important;
+    gap: 16px !important;
+  }
+
+  .badge, .specsGrid, .legalDisclaimer {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

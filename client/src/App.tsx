@@ -9,6 +9,7 @@ import { AdminLayout } from './components/layout/AdminLayout/AdminLayout';
 // Páginas Públicas
 import { Home } from './pages/Home/Home';
 import { PropertyDetail } from './pages/PropertyDetail/PropertyDetail';
+import { PropertyPrint } from './pages/PropertyPrint/PropertyPrint';
 
 // Páginas Privadas (Admin)
 import { AdminLogin } from './pages/AdminLogin/AdminLogin';
@@ -26,6 +27,7 @@ export const App: React.FC = () => {
           {/* Rutas Públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/propiedad/:id" element={<PropertyDetail />} />
+          <Route path="/propiedad/:id/imprimir" element={<PropertyPrint />} />
 
           {/* Autenticación Panel Moya */}
           <Route path="/admin/login" element={<AdminLogin />} />

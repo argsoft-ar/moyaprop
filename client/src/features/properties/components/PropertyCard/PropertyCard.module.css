@@ -14,8 +14,12 @@
   box-shadow: var(--shadow-card-hover);
 }
 
-.imageLink {
-  display: block;
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .imageWrapper {
@@ -97,17 +101,12 @@
   font-weight: 500;
 }
 
-.titleLink {
-  color: var(--text-main);
-  text-decoration: none;
-  margin-bottom: 8px;
-}
-
 .title {
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.35;
   color: var(--text-main);
+  margin-bottom: 8px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -115,7 +114,7 @@
   transition: color var(--transition-fast);
 }
 
-.titleLink:hover .title {
+.card:hover .title {
   color: var(--color-accent);
 }
 
@@ -153,4 +152,40 @@
 
 .featureItem svg {
   color: var(--color-accent);
+}
+
+.ctaRow {
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-secondary);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: 1px solid var(--border-subtle);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.ctaIcon {
+  transition: transform var(--transition-fast);
+}
+
+.card:hover .ctaButton {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+.card:hover .ctaIcon {
+  transform: translateX(4px);
 }
