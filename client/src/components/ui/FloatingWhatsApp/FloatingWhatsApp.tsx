@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { brandConfig } from '../../../config/brand.config';
 import styles from './FloatingWhatsApp.module.css';
 
 interface FloatingWhatsAppProps {
@@ -9,7 +10,7 @@ interface FloatingWhatsAppProps {
 
 export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
   phoneNumber,
-  defaultMessage = '¡Hola MoyaProp! Quisiera hacer una consulta sobre propiedades.'
+  defaultMessage = `¡Hola ${brandConfig.name}! Quisiera hacer una consulta sobre propiedades.`
 }) => {
   const location = useLocation();
 
@@ -18,7 +19,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
     return null;
   }
 
-  const phone = phoneNumber || import.meta.env.VITE_WHATSAPP_PHONE || '5491112345678';
+  const phone = phoneNumber || brandConfig.contact.whatsappPhone;
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(defaultMessage)}`;
 
   return (
@@ -27,7 +28,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
       target="_blank"
       rel="noopener noreferrer"
       className={styles.floatingBtn}
-      aria-label="Contactar por WhatsApp a MoyaProp"
+      aria-label={`Contactar por WhatsApp a ${brandConfig.name}`}
       title="Contactanos por WhatsApp"
     >
       <span className={styles.pulseRing} />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home as HomeIcon, Menu, X, Shield } from 'lucide-react';
 import { useAuth } from '../../../features/auth/context/AuthContext';
+import { brandConfig } from '../../../config/brand.config';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
@@ -49,7 +50,10 @@ export const Navbar: React.FC = () => {
             <HomeIcon size={22} />
           </div>
           <div className={styles.brandText}>
-            <span className={styles.brandName}>MOYA<span className={styles.brandHighlight}>PROP</span></span>
+            <span className={styles.brandName}>
+              {brandConfig.brandPrefix}
+              <span className={styles.brandHighlight}>{brandConfig.brandHighlight}</span>
+            </span>
           </div>
         </Link>
 

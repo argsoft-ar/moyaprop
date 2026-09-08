@@ -61,6 +61,43 @@
   max-width: 380px;
 }
 
+.licenseBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--color-accent);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  margin-top: 14px;
+  width: fit-content;
+}
+
+.licenseIcon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.licenseTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.licenseDept {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.licenseNum {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
 .colTitle {
   color: #ffffff;
   font-size: 1.1rem;
@@ -132,6 +169,17 @@
   justify-content: space-between;
   font-size: 0.85rem;
   color: #64748b;
+}
+
+.devCompany {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.devCompany:hover {
+  color: var(--color-accent);
 }
 
 @media (max-width: 860px) {

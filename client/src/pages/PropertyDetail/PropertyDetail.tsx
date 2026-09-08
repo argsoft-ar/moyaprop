@@ -9,6 +9,7 @@ import { Footer } from '../../components/layout/Footer/Footer';
 import { Spinner } from '../../components/ui/Spinner';
 import { Badge } from '../../components/ui/Badge';
 import { formatPrice, formatArea, formatDate, buildWhatsAppUrl } from '../../utils/formatters';
+import { brandConfig } from '../../config/brand.config';
 import {
   MapPin,
   Maximize2,
@@ -29,7 +30,7 @@ export const PropertyDetail: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const whatsappPhone = import.meta.env.VITE_WHATSAPP_PHONE || '5491112345678';
+  const whatsappPhone = brandConfig.contact.whatsappPhone;
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -83,7 +84,7 @@ export const PropertyDetail: React.FC = () => {
 
   // Enlace para compartir la propiedad por WhatsApp a cualquier persona o grupo
   const shareWhatsAppMessage = encodeURIComponent(
-    `¡Hola! Te comparto esta propiedad en MoyaProp:\n\n*${property.title}*\n📍 ${property.address}, ${property.city}\n💰 ${formatPrice(property.price, property.currency)}\n\n👉 Ver publicación completa:\n${window.location.href}`
+    `¡Hola! Te comparto esta propiedad en ${brandConfig.name}:\n\n*${property.title}*\n📍 ${property.address}, ${property.city}\n💰 ${formatPrice(property.price, property.currency)}\n\n👉 Ver publicación completa:\n${window.location.href}`
   );
   const shareWhatsAppUrl = `https://api.whatsapp.com/send?text=${shareWhatsAppMessage}`;
 
@@ -231,7 +232,7 @@ export const PropertyDetail: React.FC = () => {
               <div className={styles.legalDisclaimer}>
                 <Info size={16} className={styles.legalIcon} />
                 <p>
-                  Las imágenes publicadas no son necesariamente vinculantes ni tampoco contractuales. Las medidas enunciadas son aproximadas y han sido dadas al sólo hecho orientativo, las exactas surgirán del respectivo título, plano y/o plancheta catastral.
+                  {brandConfig.legal.disclaimer}
                 </p>
               </div>
             </div>
@@ -267,7 +268,7 @@ export const PropertyDetail: React.FC = () => {
                   </a>
 
                   <div className={styles.contactGuarantee}>
-                    <span>Respuesta directa del equipo MoyaProp</span>
+                    <span>Respuesta directa del equipo {brandConfig.name}</span>
                   </div>
                 </div>
 

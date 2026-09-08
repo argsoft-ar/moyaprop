@@ -8,6 +8,7 @@ import { Navbar } from '../../components/layout/Navbar/Navbar';
 import { Footer } from '../../components/layout/Footer/Footer';
 import { AboutSection } from '../../components/sections/AboutSection/AboutSection';
 import { ContactSection } from '../../components/sections/ContactSection/ContactSection';
+import { brandConfig } from '../../config/brand.config';
 import { Sparkles, Building2, ShieldCheck, HeartHandshake } from 'lucide-react';
 import styles from './Home.module.css';
 
@@ -73,7 +74,7 @@ export const Home: React.FC = () => {
         <div className={styles.heroContainer}>
           <div className={styles.heroBadge}>
             <Sparkles size={16} />
-            <span>MoyaProp • Construyendo confianza en la gestión</span>
+            <span>{brandConfig.name} • {brandConfig.slogan}</span>
           </div>
           <h1 className={styles.heroTitle}>
             Tu próximo hogar comienza con una decisión inteligente.
@@ -151,7 +152,7 @@ export const Home: React.FC = () => {
             <div className={styles.featureBox}>
               <div className={styles.featureIcon}><HeartHandshake size={24} /></div>
               <h3>Atención Directa</h3>
-              <p>Trato personal y directo con la familia Moya, sin intermediarios ni demoras.</p>
+              <p>Trato personal y directo con {brandConfig.agent.name}, sin intermediarios ni demoras.</p>
             </div>
           </div>
         </div>

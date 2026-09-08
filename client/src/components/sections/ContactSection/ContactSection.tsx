@@ -9,10 +9,11 @@ import {
 import { Button } from '../../ui/Button';
 import { Input } from '../../ui/Input';
 import { Select } from '../../ui/Select';
+import { brandConfig } from '../../../config/brand.config';
 import styles from './ContactSection.module.css';
 
 export const ContactSection: React.FC = () => {
-  const whatsappPhone = import.meta.env.VITE_WHATSAPP_PHONE || '5491112345678';
+  const whatsappPhone = brandConfig.contact.whatsappPhone;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -68,8 +69,8 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div className={styles.channelDetails}>
                     <span className={styles.channelLabel}>Ubicación</span>
-                    <span className={styles.channelValue}>Zona Sur del Gran Buenos Aires</span>
-                    <span className={styles.channelSub}>Burzaco, Adrogué y alrededores</span>
+                    <span className={styles.channelValue}>{brandConfig.contact.location}</span>
+                    <span className={styles.channelSub}>{brandConfig.contact.coverageArea}</span>
                   </div>
                 </div>
 
@@ -85,14 +86,14 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div className={styles.channelDetails}>
                     <span className={styles.channelLabel}>WhatsApp / Teléfono</span>
-                    <span className={styles.channelValue}>+54 9 11 1234-5678</span>
-                    <span className={styles.channelSub}>Lunes a Viernes de 9 a 18 hs</span>
+                    <span className={styles.channelValue}>{brandConfig.contact.phone}</span>
+                    <span className={styles.channelSub}>{brandConfig.contact.hours}</span>
                   </div>
                 </a>
 
                 {/* 3. Correo Electrónico */}
                 <a
-                  href="mailto:contacto@moyaprop.com"
+                  href={`mailto:${brandConfig.contact.email}`}
                   className={styles.channelItem}
                 >
                   <div className={styles.channelIcon}>
@@ -100,7 +101,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div className={styles.channelDetails}>
                     <span className={styles.channelLabel}>Correo Electrónico</span>
-                    <span className={styles.channelValue}>contacto@moyaprop.com</span>
+                    <span className={styles.channelValue}>{brandConfig.contact.email}</span>
                     <span className={styles.channelSub}>Consultas generales y tasaciones</span>
                   </div>
                 </a>
@@ -113,7 +114,7 @@ export const ContactSection: React.FC = () => {
             <div className={styles.formCard}>
               <h3 className={styles.formTitle}>Envíanos tu Consulta</h3>
               <p className={styles.formDesc}>
-                Completa el siguiente formulario y un asesor de MoyaProp se comunicará contigo a la brevedad.
+                Completa el siguiente formulario y un asesor de {brandConfig.name} se comunicará contigo a la brevedad.
               </p>
 
               {isSubmitted ? (
@@ -121,7 +122,7 @@ export const ContactSection: React.FC = () => {
                   <CheckCircle size={48} className={styles.successIcon} />
                   <h4 className={styles.successTitle}>¡Consulta recibida con éxito!</h4>
                   <p className={styles.successMsg}>
-                    Muchas gracias por contactarte con MoyaProp, {formData.name}. Hemos recibido tu mensaje y te responderemos lo antes posible.
+                    Muchas gracias por contactarte con {brandConfig.name}, {formData.name}. Hemos recibido tu mensaje y te responderemos lo antes posible.
                   </p>
                   <Button
                     type="button"

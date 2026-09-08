@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { propertyService } from '../../features/properties/services/propertyService';
 import { Property } from '../../types/property.types';
 import { formatPrice, formatArea } from '../../utils/formatters';
+import { brandConfig } from '../../config/brand.config';
 import { Spinner } from '../../components/ui/Spinner';
 import { Printer, ArrowLeft } from 'lucide-react';
 import styles from './PropertyPrint.module.css';
@@ -104,16 +105,17 @@ export const PropertyPrint: React.FC = () => {
         <header className={styles.headerRow}>
           <div className={styles.brandCol}>
             <div className={styles.logoText}>
-              MOYA<span className={styles.logoHighlight}>PROP</span>
+              {brandConfig.brandPrefix}
+              <span className={styles.logoHighlight}>{brandConfig.brandHighlight}</span>
             </div>
-            <span className={styles.logoSlogan}>«Construyendo confianza en la gestión»</span>
+            <span className={styles.logoSlogan}>«{brandConfig.slogan}»</span>
           </div>
 
           <div className={styles.contactCol}>
-            <span className={styles.contactAgent}>Carlos Moya • Asesor Inmobiliario</span>
-            <span>Tel / WhatsApp: +54 9 11 1234-5678</span>
-            <span>Email: contacto@moyaprop.com</span>
-            <span>Zona Sur del Gran Buenos Aires</span>
+            <span className={styles.contactAgent}>{brandConfig.agent.name} • {brandConfig.agent.title}</span>
+            <span>Tel / WhatsApp: {brandConfig.contact.phone}</span>
+            <span>Email: {brandConfig.contact.email}</span>
+            <span>{brandConfig.contact.location}</span>
           </div>
         </header>
 
@@ -202,13 +204,13 @@ export const PropertyPrint: React.FC = () => {
         {/* Cláusula Legal / Disclaimer */}
         <div className={styles.legalDisclaimer}>
           <p>
-            * Las imágenes publicadas no son necesariamente vinculantes ni tampoco contractuales. Las medidas enunciadas son aproximadas y han sido dadas al sólo hecho orientativo, las exactas surgirán del respectivo título, plano y/o plancheta catastral.
+            * {brandConfig.legal.disclaimer}
           </p>
         </div>
 
         {/* 4. Pie de Página */}
         <footer className={styles.sheetFooter}>
-          <span>MoyaProp • Gestión Inmobiliaria Profesional • Documento informativo no contractual</span>
+          <span>{brandConfig.name} • Gestión Inmobiliaria Profesional • Documento informativo no contractual</span>
           <span>Ficha emitida: {currentDate}</span>
         </footer>
       </div>
