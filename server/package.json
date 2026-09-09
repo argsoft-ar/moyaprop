@@ -11,7 +11,8 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "test:api": "tsx src/smoke-test.ts"
   },
   "keywords": ["real-estate", "inmobiliaria", "express", "typescript", "prisma"],
   "author": "MoyaProp",

@@ -1,5 +1,6 @@
-﻿import React from 'react';
+import React from 'react';
 import { MapPin, ExternalLink, Navigation } from 'lucide-react';
+import { brandConfig } from '../../../../config/brand.config';
 import styles from './PropertyMap.module.css';
 
 interface PropertyMapProps {
@@ -79,7 +80,7 @@ export const PropertyMap: React.FC<PropertyMapProps> = ({
 
       <div className={styles.footerNote}>
         <MapPin size={14} />
-        <span>Ubicación referencial provista por MoyaProp</span>
+        <span>Ubicación referencial provista por {brandConfig.name}</span>
       </div>
     </section>
   );

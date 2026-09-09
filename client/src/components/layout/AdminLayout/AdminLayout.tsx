@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Home, PlusCircle, LayoutDashboard, LogOut, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../../features/auth/context/AuthContext';
+import { brandConfig } from '../../../config/brand.config';
 import styles from './AdminLayout.module.css';
 
 export const AdminLayout: React.FC = () => {
@@ -26,7 +27,7 @@ export const AdminLayout: React.FC = () => {
               <Home size={20} />
             </div>
             <div className={styles.brandInfo}>
-              <span className={styles.brandTitle}>MOYA<span className={styles.accent}>PROP</span></span>
+              <span className={styles.brandTitle}>{brandConfig.brandPrefix}<span className={styles.accent}>{brandConfig.brandHighlight}</span></span>
               <span className={styles.brandSubtitle}>Panel de Control</span>
             </div>
           </div>
@@ -79,7 +80,7 @@ export const AdminLayout: React.FC = () => {
       <main className={styles.mainContent}>
         <header className={styles.topHeader}>
           <div className={styles.topTitle}>
-            Gestión Privada MoyaProp
+            Gestión Privada {brandConfig.name}
           </div>
           <div className={styles.topActions}>
             <span className={styles.liveBadge}>🟢 Sistema en línea</span>

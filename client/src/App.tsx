@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './features/auth/context/AuthContext';
 import { ProtectedRoute } from './routes/ProtectedRoute';
+import { brandConfig } from './config/brand.config';
 
 // Layouts
 import { AdminLayout } from './components/layout/AdminLayout/AdminLayout';
@@ -20,6 +21,9 @@ import { AdminPropertyEdit } from './pages/AdminPropertyEdit/AdminPropertyEdit';
 import { FloatingWhatsApp } from './components/ui/FloatingWhatsApp';
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    document.title = `${brandConfig.name} | ${brandConfig.slogan}`;
+  }, []);
   return (
     <AuthProvider>
       <BrowserRouter>

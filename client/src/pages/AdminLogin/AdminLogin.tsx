@@ -8,6 +8,7 @@ import { authService } from '../../features/auth/services/authService';
 import { useAuth } from '../../features/auth/context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
+import { brandConfig } from '../../config/brand.config';
 import styles from './AdminLogin.module.css';
 
 const loginSchema = z.object({
@@ -30,7 +31,7 @@ export const AdminLogin: React.FC = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: 'admin@moyaprop.com',
+      email: '',
       password: ''
     }
   });
@@ -59,7 +60,7 @@ export const AdminLogin: React.FC = () => {
           <div className={styles.logoIcon}>
             <Home size={28} />
           </div>
-          <h1 className={styles.title}>MOYA<span className={styles.highlight}>PROP</span></h1>
+          <h1 className={styles.title}>{brandConfig.brandPrefix}<span className={styles.highlight}>{brandConfig.brandHighlight}</span></h1>
           <p className={styles.subtitle}>Panel de Administración Exclusivo</p>
         </div>
 
@@ -74,7 +75,7 @@ export const AdminLogin: React.FC = () => {
           <Input
             label="Correo Electrónico"
             type="email"
-            placeholder="ejemplo@moyaprop.com"
+            placeholder={`admin@${brandConfig.brandPrefix.toLowerCase()}${brandConfig.brandHighlight.toLowerCase()}.com`}
             leftIcon={<Mail size={18} />}
             error={errors.email?.message}
             {...register('email')}

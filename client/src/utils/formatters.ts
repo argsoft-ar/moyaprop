@@ -1,4 +1,5 @@
 import { Currency } from '../types/property.types';
+import { brandConfig } from '../config/brand.config';
 
 export const formatPrice = (price: number, currency: Currency): string => {
   const symbol = currency === 'USD' ? 'USD ' : '$ ';
@@ -25,7 +26,7 @@ export const formatDate = (dateString: string): string => {
 export const buildWhatsAppUrl = (phone: string, propertyTitle: string, propertyUrl: string): string => {
   const cleanPhone = phone.replace(/\D/g, '');
   const message = encodeURIComponent(
-    `¡Hola MoyaProp! Me interesa obtener más información sobre la propiedad: "${propertyTitle}".\nEnlace: ${propertyUrl}`
+    `¡Hola ${brandConfig.name}! Me interesa obtener más información sobre la propiedad: "${propertyTitle}".\nEnlace: ${propertyUrl}`
   );
   return `https://wa.me/${cleanPhone}?text=${message}`;
 };

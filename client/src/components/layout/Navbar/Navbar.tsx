@@ -100,7 +100,7 @@ export const Navbar: React.FC = () => {
               <span>Panel Admin ({user.name})</span>
             </Link>
           ) : (
-            <Link to="/admin/login" className={styles.adminLoginLink} title="Acceso para la familia Moya">
+            <Link to="/admin/login" className={styles.adminLoginLink} title={`Acceso Administración ${brandConfig.name}`}>
               <Shield size={16} />
               <span>Gestión</span>
             </Link>
@@ -161,7 +161,7 @@ export const Navbar: React.FC = () => {
           ) : (
             <Link to="/admin/login" className={styles.mobileAdminLink} onClick={closeMobileMenu}>
               <Shield size={18} />
-              <span>Acceso Administrador Moya</span>
+              <span>Acceso Administración</span>
             </Link>
           )}
         </div>
