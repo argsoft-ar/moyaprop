@@ -1,7 +1,7 @@
 import React from 'react';
 import { Property } from '../../../../types/property.types';
 import { PropertyCard } from '../PropertyCard/PropertyCard';
-import { Spinner } from '../../../../components/ui/Spinner';
+import { Spinner, EmptyState } from '../../../../components/ui';
 import { Home } from 'lucide-react';
 import styles from './PropertyGrid.module.css';
 
@@ -27,20 +27,13 @@ export const PropertyGrid: React.FC<PropertyGridProps> = ({
 
   if (properties.length === 0) {
     return (
-      <div className={styles.emptyContainer}>
-        <div className={styles.emptyIcon}>
-          <Home size={36} />
-        </div>
-        <h3 className={styles.emptyTitle}>No se encontraron propiedades</h3>
-        <p className={styles.emptySubtitle}>
-          Prueba ajustando los filtros de búsqueda o explorando otras localidades.
-        </p>
-        {onClearFilters && (
-          <button className={styles.clearButton} onClick={onClearFilters}>
-            Limpiar todos los filtros
-          </button>
-        )}
-      </div>
+      <EmptyState
+        icon={<Home size={36} />}
+        title="No se encontraron propiedades"
+        description="Prueba ajustando los filtros de búsqueda o explorando otras localidades."
+        actionLabel={onClearFilters ? 'Limpiar todos los filtros' : undefined}
+        onAction={onClearFilters}
+      />
     );
   }
 

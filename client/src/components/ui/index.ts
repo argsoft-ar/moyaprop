@@ -5,3 +5,8 @@ export * from './Badge';
 export * from './Spinner';
 export * from './Modal';
 export * from './FloatingWhatsApp';
+export * from './ConfirmDialog';
+export * from './Pagination';
+export * from './EmptyState';
+export * from './StatCard';
+export * from './LegalDisclaimer';

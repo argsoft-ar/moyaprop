@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Search, Filter, AlertTriangle } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
 import { adminService } from '../../features/admin/services/adminService';
 import { Property, PropertyStatus } from '../../types/property.types';
 import { PropertyTable } from '../../features/admin/components/PropertyTable/PropertyTable';
-import { Button } from '../../components/ui/Button';
-import { Modal } from '../../components/ui/Modal';
-import { Spinner } from '../../components/ui/Spinner';
+import { Button, Spinner, ConfirmDialog, StatCard, Pagination } from '../../components/ui';
 import styles from './AdminDashboard.module.css';
 
 export const AdminDashboard: React.FC = () => {
@@ -17,8 +15,7 @@ export const AdminDashboard: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [meta, setMeta] = useState({ total: 0, totalPages: 1 });
 
-  // Modal de Confirmación de Borrado
-  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  // Diálogo de Confirmación de Borrado
   const [propertyToDelete, setPropertyToDelete] = useState<{ id: string; title: string } | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -65,7 +62,6 @@ export const AdminDashboard: React.FC = () => {
 
   const handleOpenDelete = (id: string, title: string) => {
     setPropertyToDelete({ id, title });
-    setDeleteModalOpen(true);
   };
 
   const handleConfirmDelete = async () => {
@@ -73,7 +69,6 @@ export const AdminDashboard: React.FC = () => {
     setIsDeleting(true);
     try {
       await adminService.deleteProperty(propertyToDelete.id);
-      setDeleteModalOpen(false);
       setPropertyToDelete(null);
       loadProperties();
     } catch (error) {
@@ -109,22 +104,10 @@ export const AdminDashboard: React.FC = () => {
 
       {/* Tarjetas de Métricas Rápidas */}
       <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <span className={styles.statLabel}>Total en Catálogo</span>
-          <span className={styles.statValue}>{meta.total}</span>
-        </div>
-        <div className={`${styles.statCard} ${styles.statActive}`}>
-          <span className={styles.statLabel}>Activas (Públicas)</span>
-          <span className={styles.statValue}>{countActive}</span>
-        </div>
-        <div className={`${styles.statCard} ${styles.statPaused}`}>
-          <span className={styles.statLabel}>Pausadas (Ocultas)</span>
-          <span className={styles.statValue}>{countPaused}</span>
-        </div>
-        <div className={`${styles.statCard} ${styles.statClosed}`}>
-          <span className={styles.statLabel}>Vendidas / Alquiladas</span>
-          <span className={styles.statValue}>{countClosed}</span>
-        </div>
+        <StatCard label="Total en Catálogo" value={meta.total} />
+        <StatCard label="Activas (Públicas)" value={countActive} variant="active" />
+        <StatCard label="Pausadas (Ocultas)" value={countPaused} variant="paused" />
+        <StatCard label="Vendidas / Alquiladas" value={countClosed} variant="closed" />
       </div>
 
       {/* Barra de Filtros Rápidos */}
@@ -184,63 +167,30 @@ export const AdminDashboard: React.FC = () => {
       )}
 
       {/* Paginación */}
-      {meta.totalPages > 1 && (
-        <div className={styles.pagination}>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
-          >
-            Anterior
-          </Button>
-          <span className={styles.pageInfo}>Página {page} de {meta.totalPages}</span>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={page === meta.totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            Siguiente
-          </Button>
-        </div>
-      )}
+      <Pagination
+        page={page}
+        totalPages={meta.totalPages}
+        onPageChange={setPage}
+      />
 
-      {/* Modal de Confirmación para Eliminación */}
-      <Modal
-        isOpen={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
+      {/* Diálogo de Confirmación para Eliminación */}
+      <ConfirmDialog
+        open={propertyToDelete !== null}
         title="Confirmar eliminación de inmueble"
-      >
-        <div className={styles.deleteModalContent}>
-          <div className={styles.warningIconWrapper}>
-            <AlertTriangle size={36} />
-          </div>
-          <p className={styles.deletePrompt}>
+        message={
+          <>
             ¿Estás seguro de que deseas eliminar permanentemente la propiedad:
             <strong> "{propertyToDelete?.title}"</strong>?
-          </p>
-          <p className={styles.deleteSubprompt}>
-            Esta acción eliminará la ficha técnica y todas sus fotografías de la base de datos.
-          </p>
-          <div className={styles.modalActions}>
-            <Button
-              variant="outline"
-              onClick={() => setDeleteModalOpen(false)}
-              disabled={isDeleting}
-            >
-              Cancelar
-            </Button>
-            <Button
-              variant="danger"
-              onClick={handleConfirmDelete}
-              isLoading={isDeleting}
-            >
-              Sí, eliminar definitivamente
-            </Button>
-          </div>
-        </div>
-      </Modal>
+          </>
+        }
+        description="Esta acción eliminará la ficha técnica y todas sus fotografías de la base de datos."
+        confirmLabel="Sí, eliminar definitivamente"
+        cancelLabel="Cancelar"
+        variant="danger"
+        loading={isDeleting}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setPropertyToDelete(null)}
+      />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Edit2, Trash2, Eye, ExternalLink } from 'lucide-react';
+import { Edit2, Trash2, ExternalLink } from 'lucide-react';
 import { Property, PropertyStatus } from '../../../../types/property.types';
 import { formatPrice } from '../../../../utils/formatters';
-import { Badge } from '../../../../components/ui/Badge';
+import { Badge, EmptyState } from '../../../../components/ui';
 import styles from './PropertyTable.module.css';
 
 interface PropertyTableProps {
@@ -20,21 +20,12 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
 }) => {
   if (properties.length === 0) {
     return (
-      <div className={styles.empty}>
-        <p>No se encontraron propiedades en el inventario.</p>
-      </div>
+      <EmptyState
+        title="No se encontraron propiedades en el inventario"
+        description="Publica una nueva propiedad o cambia los filtros de estado para ver publicaciones."
+      />
     );
   }
-
-  const getStatusVariant = (status: PropertyStatus) => {
-    switch (status) {
-      case 'ACTIVA': return 'active';
-      case 'PAUSADA': return 'paused';
-      case 'VENDIDA': return 'sold';
-      case 'ALQUILADA': return 'rented';
-      default: return 'default';
-    }
-  };
 
   return (
     <div className={styles.tableWrapper}>

@@ -7,9 +7,11 @@ import { PropertyGrid } from '../../features/properties/components/PropertyGrid/
 import { Navbar } from '../../components/layout/Navbar/Navbar';
 import { Footer } from '../../components/layout/Footer/Footer';
 import { AboutSection } from '../../components/sections/AboutSection/AboutSection';
+import { ValuesSection } from '../../components/sections/ValuesSection';
 import { ContactSection } from '../../components/sections/ContactSection/ContactSection';
+import { Pagination } from '../../components/ui';
 import { brandConfig } from '../../config/brand.config';
-import { Sparkles, Building2, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import styles from './Home.module.css';
 
 export const Home: React.FC = () => {
@@ -108,57 +110,22 @@ export const Home: React.FC = () => {
           />
 
           {/* Paginación */}
-          {meta.totalPages > 1 && (
-            <div className={styles.pagination}>
-              <button
-                disabled={filters.page === 1}
-                onClick={() => setFilters({ ...filters, page: (filters.page || 1) - 1 })}
-                className={styles.pageBtn}
-              >
-                Anterior
-              </button>
-              <span className={styles.pageInfo}>
-                Página {meta.page} de {meta.totalPages}
-              </span>
-              <button
-                disabled={filters.page === meta.totalPages}
-                onClick={() => setFilters({ ...filters, page: (filters.page || 1) + 1 })}
-                className={styles.pageBtn}
-              >
-                Siguiente
-              </button>
-            </div>
-          )}
+          <Pagination
+            page={meta.page}
+            totalPages={meta.totalPages}
+            align="center"
+            onPageChange={(newPage) => setFilters({ ...filters, page: newPage })}
+          />
         </div>
       </main>
 
-      {/* Nueva Sección: Nosotros */}
+      {/* Sección: Nosotros */}
       <AboutSection />
 
-      {/* Beneficios y Valores MoyaProp */}
-      <section className={styles.valuesSection}>
-        <div className={styles.container}>
-          <div className={styles.featuresSection}>
-            <div className={styles.featureBox}>
-              <div className={styles.featureIcon}><Building2 size={24} /></div>
-              <h3>Tasaciones Reales</h3>
-              <p>Valuamos inmuebles con datos precisos del mercado para asegurar negociaciones justas.</p>
-            </div>
-            <div className={styles.featureBox}>
-              <div className={styles.featureIcon}><ShieldCheck size={24} /></div>
-              <h3>Seguridad Jurídica</h3>
-              <p>Revisión técnica de escrituras, títulos y contratos para total tranquilidad de las partes.</p>
-            </div>
-            <div className={styles.featureBox}>
-              <div className={styles.featureIcon}><HeartHandshake size={24} /></div>
-              <h3>Atención Directa</h3>
-              <p>Trato personal y directo con {brandConfig.agent.name}, sin intermediarios ni demoras.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Beneficios y Valores */}
+      <ValuesSection />
 
-      {/* Nueva Sección: Contacto */}
+      {/* Sección: Contacto */}
       <ContactSection />
 
       <Footer />

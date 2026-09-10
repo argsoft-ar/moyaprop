@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { propertyService } from '../../features/properties/services/propertyService';
 import { Property } from '../../types/property.types';
 import { formatPrice, formatArea } from '../../utils/formatters';
 import { brandConfig } from '../../config/brand.config';
-import { Spinner } from '../../components/ui/Spinner';
+import { Spinner, EmptyState, LegalDisclaimer } from '../../components/ui';
 import { Printer, ArrowLeft } from 'lucide-react';
 import styles from './PropertyPrint.module.css';
 
@@ -47,11 +47,11 @@ export const PropertyPrint: React.FC = () => {
 
   if (error || !property) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-        <h2>No pudimos generar la ficha</h2>
-        <p style={{ color: '#64748b', marginBottom: '20px' }}>{error || 'La propiedad solicitada no se encuentra disponible.'}</p>
-        <Link to="/" style={{ color: '#f26522', fontWeight: 600 }}>Volver al catálogo principal</Link>
-      </div>
+      <EmptyState
+        title="No pudimos generar la ficha"
+        description={error || 'La propiedad solicitada no se encuentra disponible.'}
+        backLink={{ to: '/', label: 'Volver al catálogo principal' }}
+      />
     );
   }
 
@@ -202,11 +202,7 @@ export const PropertyPrint: React.FC = () => {
         </section>
 
         {/* Cláusula Legal / Disclaimer */}
-        <div className={styles.legalDisclaimer}>
-          <p>
-            * {brandConfig.legal.disclaimer}
-          </p>
-        </div>
+        <LegalDisclaimer variant="print" text={`* ${brandConfig.legal.disclaimer}`} />
 
         {/* 4. Pie de Página */}
         <footer className={styles.sheetFooter}>

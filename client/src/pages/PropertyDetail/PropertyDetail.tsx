@@ -4,24 +4,14 @@ import { propertyService } from '../../features/properties/services/propertyServ
 import { Property } from '../../types/property.types';
 import { PropertyGallery } from '../../features/properties/components/PropertyGallery/PropertyGallery';
 import { PropertyMap } from '../../features/properties/components/PropertyMap';
+import { PropertySpecs } from '../../features/properties/components/PropertySpecs';
+import { PropertyContactCard } from '../../features/properties/components/PropertyContactCard';
 import { Navbar } from '../../components/layout/Navbar/Navbar';
 import { Footer } from '../../components/layout/Footer/Footer';
-import { Spinner } from '../../components/ui/Spinner';
-import { Badge } from '../../components/ui/Badge';
-import { formatPrice, formatArea, formatDate, buildWhatsAppUrl } from '../../utils/formatters';
+import { Spinner, Badge, EmptyState, LegalDisclaimer } from '../../components/ui';
+import { formatPrice, buildWhatsAppUrl } from '../../utils/formatters';
 import { brandConfig } from '../../config/brand.config';
-import {
-  MapPin,
-  Maximize2,
-  BedDouble,
-  Bath,
-  Car,
-  Calendar,
-  MessageCircle,
-  ArrowLeft,
-  Printer,
-  Info
-} from 'lucide-react';
+import { MapPin, MessageCircle, ArrowLeft, Printer } from 'lucide-react';
 import styles from './PropertyDetail.module.css';
 
 export const PropertyDetail: React.FC = () => {
@@ -66,14 +56,11 @@ export const PropertyDetail: React.FC = () => {
     return (
       <div className={styles.loadingWrapper}>
         <Navbar />
-        <div className={styles.centerBox}>
-          <h2>Publicación no disponible</h2>
-          <p>{error || 'El inmueble que buscas no existe o ha sido pausado.'}</p>
-          <Link to="/" className={styles.backButton}>
-            <ArrowLeft size={18} />
-            <span>Volver al catálogo principal</span>
-          </Link>
-        </div>
+        <EmptyState
+          title="Publicación no disponible"
+          description={error || 'El inmueble que buscas no existe o ha sido pausado.'}
+          backLink={{ to: '/', label: 'Volver al catálogo principal' }}
+        />
         <Footer />
       </div>
     );
@@ -157,58 +144,7 @@ export const PropertyDetail: React.FC = () => {
               <PropertyGallery images={property.images} title={property.title} />
 
               {/* Ficha Técnica Rápida */}
-              <div className={styles.specsBox}>
-                <h3 className={styles.boxTitle}>Características Principales</h3>
-                <div className={styles.specsGrid}>
-                  <div className={styles.specItem}>
-                    <Maximize2 size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Sup. Total</span>
-                      <span className={styles.specVal}>{formatArea(property.totalArea)}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.specItem}>
-                    <Maximize2 size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Sup. Cubierta</span>
-                      <span className={styles.specVal}>{formatArea(property.coveredArea)}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.specItem}>
-                    <BedDouble size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Habitaciones</span>
-                      <span className={styles.specVal}>{property.bedrooms}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.specItem}>
-                    <Bath size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Baños</span>
-                      <span className={styles.specVal}>{property.bathrooms}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.specItem}>
-                    <Car size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Cocheras</span>
-                      <span className={styles.specVal}>{property.garages}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.specItem}>
-                    <Calendar size={20} className={styles.specIcon} />
-                    <div className={styles.specTexts}>
-                      <span className={styles.specLabel}>Publicado</span>
-                      <span className={styles.specVal}>{formatDate(property.createdAt)}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PropertySpecs property={property} />
 
               {/* Descripción */}
               <div className={styles.descriptionBox}>
@@ -229,64 +165,12 @@ export const PropertyDetail: React.FC = () => {
               />
 
               {/* Cláusula Legal / Disclaimer */}
-              <div className={styles.legalDisclaimer}>
-                <Info size={16} className={styles.legalIcon} />
-                <p>
-                  {brandConfig.legal.disclaimer}
-                </p>
-              </div>
+              <LegalDisclaimer />
             </div>
 
             {/* Columna Derecha: Tarjeta de Precio y Contacto Fijo */}
             <div className={styles.rightCol}>
-              <div className={styles.stickyCard}>
-                <div className={styles.priceHeader}>
-                  <span className={styles.priceLabel}>Precio de publicación</span>
-                  <div className={styles.priceNumber}>
-                    {formatPrice(property.price, property.currency)}
-                  </div>
-                  {property.expenses && property.expenses > 0 && (
-                    <span className={styles.expensesText}>
-                      + {formatPrice(property.expenses, property.currency)} expensas
-                    </span>
-                  )}
-                </div>
-
-                <div className={styles.contactActionBox}>
-                  <p className={styles.contactPrompt}>
-                    ¿Te interesa coordinar una visita o consultar más información sobre esta propiedad?
-                  </p>
-
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.whatsappActionBtn}
-                  >
-                    <MessageCircle size={20} />
-                    <span>Contactar por WhatsApp</span>
-                  </a>
-
-                  <div className={styles.contactGuarantee}>
-                    <span>Respuesta directa del equipo {brandConfig.name}</span>
-                  </div>
-                </div>
-
-                <div className={styles.metaSummary}>
-                  <div className={styles.metaRow}>
-                    <span>Código de referencia:</span>
-                    <strong>{property.id.substring(0, 8).toUpperCase()}</strong>
-                  </div>
-                  <div className={styles.metaRow}>
-                    <span>Operación:</span>
-                    <strong>{property.operationType}</strong>
-                  </div>
-                  <div className={styles.metaRow}>
-                    <span>Tipo:</span>
-                    <strong>{property.propertyType}</strong>
-                  </div>
-                </div>
-              </div>
+              <PropertyContactCard property={property} whatsappUrl={whatsappUrl} />
             </div>
           </div>
         </div>

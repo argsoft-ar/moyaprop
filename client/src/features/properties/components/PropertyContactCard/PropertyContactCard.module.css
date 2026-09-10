@@ -1,0 +1,99 @@
+.stickyCard {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.priceHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.priceLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.priceNumber {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.expensesText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.contactActionBox {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #f0fdf4;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid #bbf7d0;
+}
+
+.contactPrompt {
+  font-size: 0.9rem;
+  color: #166534;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.whatsappActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #25d366;
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.whatsappActionBtn:hover {
+  background-color: #1eb954;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
+.contactGuarantee {
+  font-size: 0.75rem;
+  color: #15803d;
+  text-align: center;
+}
+
+.metaSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.metaRow strong {
+  color: var(--text-main);
+}
