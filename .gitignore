@@ -38,3 +38,7 @@ Thumbs.db
 # Uploaded media (local storage)
 uploads/
 */uploads/
+.neon
+neon.ts
+package.json
+package-lock.json
