@@ -45,9 +45,19 @@ export const AdminLogin: React.FC = () => {
       login(response.token, response.user);
       navigate('/admin');
     } catch (error: any) {
-      setErrorMessage(
-        error.response?.data?.message || 'Error al iniciar sesión. Verifica tus credenciales.'
-      );
+      if (error.code === 'ERR_NETWORK' || !error.response) {
+        setErrorMessage(
+          'El servidor en Render está iniciando (Cold Start de la cuenta gratuita). Por favor espera 30 segundos y reintenta.'
+        );
+      } else if (error.response?.status === 404) {
+        setErrorMessage(
+          'Ruta de API no encontrada (404). Verifica que el backend esté online y accesible.'
+        );
+      } else {
+        setErrorMessage(
+          error.response?.data?.message || 'Error al iniciar sesión. Verifica tus credenciales.'
+        );
+      }
     } finally {
       setIsLoading(false);
     }

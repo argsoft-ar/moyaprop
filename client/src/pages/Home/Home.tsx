@@ -34,8 +34,11 @@ export const Home: React.FC = () => {
     }
   }, [operationTypeParam]);
 
+  const [loadError, setLoadError] = useState<string | null>(null);
+
   const loadProperties = async (currentFilters: FilterType) => {
     setIsLoading(true);
+    setLoadError(null);
     try {
       const result = await propertyService.getPublicProperties(currentFilters);
       setProperties(result.data);
@@ -44,8 +47,13 @@ export const Home: React.FC = () => {
         page: result.meta.page,
         totalPages: result.meta.totalPages
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error cargando propiedades:', error);
+      if (error.code === 'ERR_NETWORK' || !error.response) {
+        setLoadError('El servidor en Render está iniciando (Cold Start). Aguarda unos segundos y presiona Reintentar.');
+      } else {
+        setLoadError('No se pudieron obtener las propiedades del servidor.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -106,6 +114,8 @@ export const Home: React.FC = () => {
           <PropertyGrid
             properties={properties}
             isLoading={isLoading}
+            error={loadError}
+            onRetry={() => loadProperties(filters)}
             onClearFilters={handleResetFilters}
           />
 
