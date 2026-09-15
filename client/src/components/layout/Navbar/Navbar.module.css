@@ -96,47 +96,6 @@
   border-radius: var(--radius-full);
 }
 
-.actionsDesktop {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.adminBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  background-color: var(--color-accent-soft);
-  color: var(--color-accent);
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-accent-border);
-  transition: all var(--transition-fast);
-}
-
-.adminBadge:hover {
-  background-color: #ffedd5;
-}
-
-.adminLoginLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  padding: 8px 12px;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
-}
-
-.adminLoginLink:hover {
-  color: var(--text-main);
-  background-color: var(--bg-hover);
-}
-
 .menuButton {
   display: none;
   color: var(--text-main);
@@ -162,25 +121,8 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.mobileDivider {
-  height: 12px;
-}
-
-.mobileAdminLink {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background-color: var(--bg-hover);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-top: 8px;
-}
-
 @media (max-width: 820px) {
-  .navDesktop,
-  .actionsDesktop {
+  .navDesktop {
     display: none;
   }
 

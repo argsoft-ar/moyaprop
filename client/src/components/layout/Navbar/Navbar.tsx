@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home as HomeIcon, Menu, X, Shield } from 'lucide-react';
-import { useAuth } from '../../../features/auth/context/AuthContext';
+import { Home as HomeIcon, Menu, X } from 'lucide-react';
 import { brandConfig } from '../../../config/brand.config';
 import styles from './Navbar.module.css';
 
@@ -9,7 +8,6 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMobileMenu = () => setMobileMenuOpen(false);
@@ -92,21 +90,6 @@ export const Navbar: React.FC = () => {
           </button>
         </nav>
 
-        {/* Botón de Acceso Admin */}
-        <div className={styles.actionsDesktop}>
-          {user ? (
-            <Link to="/admin" className={styles.adminBadge}>
-              <Shield size={16} />
-              <span>Panel Admin ({user.name})</span>
-            </Link>
-          ) : (
-            <Link to="/admin/login" className={styles.adminLoginLink} title={`Acceso Administración ${brandConfig.name}`}>
-              <Shield size={16} />
-              <span>Gestión</span>
-            </Link>
-          )}
-        </div>
-
         {/* Botón Hamburguesa Móvil */}
         <button
           className={styles.menuButton}
@@ -151,19 +134,6 @@ export const Navbar: React.FC = () => {
           >
             Contacto
           </button>
-
-          <div className={styles.mobileDivider} />
-          {user ? (
-            <Link to="/admin" className={styles.mobileAdminLink} onClick={closeMobileMenu}>
-              <Shield size={18} />
-              <span>Ir al Panel de Administración</span>
-            </Link>
-          ) : (
-            <Link to="/admin/login" className={styles.mobileAdminLink} onClick={closeMobileMenu}>
-              <Shield size={18} />
-              <span>Acceso Administración</span>
-            </Link>
-          )}
         </div>
       )}
     </header>
