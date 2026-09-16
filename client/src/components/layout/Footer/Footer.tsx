@@ -14,9 +14,17 @@ export const Footer: React.FC = () => {
           {/* Marca, Propósito y Matrícula */}
           <div className={styles.brandCol}>
             <div className={styles.brand}>
-              <div className={styles.logoIcon}>
-                <Home size={20} />
-              </div>
+              {brandConfig.logoUrl ? (
+                <img
+                  src={brandConfig.logoUrl}
+                  alt={brandConfig.name}
+                  className={styles.logoImg}
+                />
+              ) : (
+                <div className={styles.logoIcon}>
+                  <Home size={20} />
+                </div>
+              )}
               <span className={styles.brandName}>
                 {brandConfig.brandPrefix}
                 <span className={styles.brandHighlight}>{brandConfig.brandHighlight}</span>

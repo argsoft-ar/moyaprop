@@ -60,7 +60,7 @@ export const ContactSection: React.FC = () => {
           <div className={styles.infoCol}>
             <div className={styles.infoCard}>
               <h3 className={styles.infoCardTitle}>Información y Canales Directos</h3>
-              
+
               <div className={styles.channelList}>
                 {/* 1. Ubicación */}
                 <div className={styles.channelItem}>
@@ -70,7 +70,6 @@ export const ContactSection: React.FC = () => {
                   <div className={styles.channelDetails}>
                     <span className={styles.channelLabel}>Ubicación</span>
                     <span className={styles.channelValue}>{brandConfig.contact.location}</span>
-                    <span className={styles.channelSub}>{brandConfig.contact.coverageArea}</span>
                   </div>
                 </div>
 
@@ -87,7 +86,6 @@ export const ContactSection: React.FC = () => {
                   <div className={styles.channelDetails}>
                     <span className={styles.channelLabel}>WhatsApp / Teléfono</span>
                     <span className={styles.channelValue}>{brandConfig.contact.phone}</span>
-                    <span className={styles.channelSub}>{brandConfig.contact.hours}</span>
                   </div>
                 </a>
 
@@ -114,7 +112,7 @@ export const ContactSection: React.FC = () => {
             <div className={styles.formCard}>
               <h3 className={styles.formTitle}>Envíanos tu Consulta</h3>
               <p className={styles.formDesc}>
-                Completa el siguiente formulario y un asesor de {brandConfig.name} se comunicará contigo a la brevedad.
+                Completa el siguiente formulario y nos comunicamos a la brevedad.
               </p>
 
               {isSubmitted ? (
@@ -152,7 +150,7 @@ export const ContactSection: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                     <Input
-                      label="Teléfono / WhatsApp *"
+                      label="Teléfono *"
                       type="tel"
                       placeholder="Ej: 11 2345-6789"
                       required

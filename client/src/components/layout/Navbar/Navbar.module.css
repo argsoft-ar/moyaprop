@@ -36,6 +36,13 @@
   box-shadow: 0 4px 10px var(--color-accent-glow);
 }
 
+.logoImg {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
 .brandText {
   display: flex;
   flex-direction: column;

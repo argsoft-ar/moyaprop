@@ -44,9 +44,17 @@ export const Navbar: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link to="/" className={styles.brand} onClick={() => handleNavClick()}>
-          <div className={styles.logoIcon}>
-            <HomeIcon size={22} />
-          </div>
+          {brandConfig.logoUrl ? (
+            <img
+              src={brandConfig.logoUrl}
+              alt={brandConfig.name}
+              className={styles.logoImg}
+            />
+          ) : (
+            <div className={styles.logoIcon}>
+              <HomeIcon size={22} />
+            </div>
+          )}
           <div className={styles.brandText}>
             <span className={styles.brandName}>
               {brandConfig.brandPrefix}

@@ -67,9 +67,17 @@ export const AdminLogin: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <div className={styles.logoIcon}>
-            <Home size={28} />
-          </div>
+          {brandConfig.logoUrl ? (
+            <img
+              src={brandConfig.logoUrl}
+              alt={brandConfig.name}
+              className={styles.logoImg}
+            />
+          ) : (
+            <div className={styles.logoIcon}>
+              <Home size={28} />
+            </div>
+          )}
           <h1 className={styles.title}>{brandConfig.brandPrefix}<span className={styles.highlight}>{brandConfig.brandHighlight}</span></h1>
           <p className={styles.subtitle}>Panel de Administración Exclusivo</p>
         </div>

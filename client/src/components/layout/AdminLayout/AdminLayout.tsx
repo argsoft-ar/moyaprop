@@ -23,9 +23,17 @@ export const AdminLayout: React.FC = () => {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <div className={styles.brand}>
-            <div className={styles.logoIcon}>
-              <Home size={20} />
-            </div>
+            {brandConfig.logoUrl ? (
+              <img
+                src={brandConfig.logoUrl}
+                alt={brandConfig.name}
+                className={styles.logoImg}
+              />
+            ) : (
+              <div className={styles.logoIcon}>
+                <Home size={20} />
+              </div>
+            )}
             <div className={styles.brandInfo}>
               <span className={styles.brandTitle}>{brandConfig.brandPrefix}<span className={styles.accent}>{brandConfig.brandHighlight}</span></span>
               <span className={styles.brandSubtitle}>Panel de Control</span>

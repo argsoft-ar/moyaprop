@@ -1,7 +1,8 @@
-﻿export interface BrandConfig {
+export interface BrandConfig {
   name: string;
   brandPrefix: string;
   brandHighlight: string;
+  logoUrl?: string;
   slogan: string;
 
   agent: {
@@ -44,14 +45,14 @@
 export const brandConfig: BrandConfig = {
   name: 'MoyaProp',
   brandPrefix: 'MOYA',
-  brandHighlight: 'PROP',
+  brandHighlight: ' Propiedades',
+  logoUrl: '/logo.svg',
   slogan: 'Construyendo confianza en la gestión',
 
   agent: {
     name: 'Carlos Moya',
-    title: 'Titular & Asesor Inmobiliario',
-    photoUrl:
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'
+    title: 'Martillero y Corredor Inmobiliario',
+    photoUrl: '/carlos.jpeg'
   },
 
   license: {
@@ -62,8 +63,8 @@ export const brandConfig: BrandConfig = {
   contact: {
     location: 'Burzaco, Buenos Aires',
     coverageArea: 'Zona Sur y alrededores',
-    phone: '+54 9 11 1234-5678',
-    whatsappPhone: '5491112345678',
+    phone: '+54 9 11 3863-3987',
+    whatsappPhone: '5491138633987',
     email: 'contacto@moyaprop.com',
     hours: 'Lunes a Viernes de 9 a 18 hs'
   },

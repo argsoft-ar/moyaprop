@@ -106,6 +106,18 @@
 
 .brandCol {
   display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brandLogoImg {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.brandTextGroup {
+  display: flex;
   flex-direction: column;
   gap: 2px;
 }

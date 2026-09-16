@@ -150,6 +150,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
   .title {
     font-size: 1.8rem;
   }

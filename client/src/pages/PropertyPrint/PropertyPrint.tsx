@@ -104,11 +104,20 @@ export const PropertyPrint: React.FC = () => {
         {/* 1. Encabezado Corporativo */}
         <header className={styles.headerRow}>
           <div className={styles.brandCol}>
-            <div className={styles.logoText}>
-              {brandConfig.brandPrefix}
-              <span className={styles.logoHighlight}>{brandConfig.brandHighlight}</span>
+            {brandConfig.logoUrl && (
+              <img
+                src={brandConfig.logoUrl}
+                alt={brandConfig.name}
+                className={styles.brandLogoImg}
+              />
+            )}
+            <div className={styles.brandTextGroup}>
+              <div className={styles.logoText}>
+                {brandConfig.brandPrefix}
+                <span className={styles.logoHighlight}>{brandConfig.brandHighlight}</span>
+              </div>
+              <span className={styles.logoSlogan}>«{brandConfig.slogan}»</span>
             </div>
-            <span className={styles.logoSlogan}>«{brandConfig.slogan}»</span>
           </div>
 
           <div className={styles.contactCol}>

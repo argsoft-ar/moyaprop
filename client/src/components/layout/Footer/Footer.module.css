@@ -35,6 +35,13 @@
   justify-content: center;
 }
 
+.logoImg {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
 .brandName {
   font-size: 1.3rem;
   font-weight: 800;
