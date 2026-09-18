@@ -12,6 +12,7 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string().optional().default(''),
   CLOUDINARY_API_KEY: z.string().optional().default(''),
   CLOUDINARY_API_SECRET: z.string().optional().default(''),
+  CLOUDINARY_FOLDER: z.string().optional().default('moyapropiedades'),
   CLIENT_URL: z.string().default('http://localhost:5173')
 });
 
@@ -37,5 +38,6 @@ export const env = _env.success
       CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || '',
       CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY || '',
       CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET || '',
+      CLOUDINARY_FOLDER: process.env.CLOUDINARY_FOLDER || 'moyapropiedades',
       CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173'
     };

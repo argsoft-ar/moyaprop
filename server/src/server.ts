@@ -6,6 +6,9 @@ import { errorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
 
+// Confiar en el proxy reverso de Render para HTTPS correcto
+app.set('trust proxy', 1);
+
 // Configuración de CORS segura
 app.use(
   cors({

@@ -26,7 +26,7 @@ export class UploadController {
         }
 
         const host = req.get('host') || `localhost:${env.PORT}`;
-        const protocol = req.protocol;
+        const protocol = env.NODE_ENV === 'production' ? 'https' : ((req.headers['x-forwarded-proto'] as string) || req.protocol);
 
         const localResults = files.map((file, idx) => {
           const ext = path.extname(file.originalname) || '.jpg';
@@ -53,7 +53,7 @@ export class UploadController {
 
       // Si Cloudinary está configurado, subir a la nube
       const uploadPromises = files.map((file, index) =>
-        UploadService.uploadImage(file.buffer).then((res) => ({
+        UploadService.uploadImage(file.buffer, env.CLOUDINARY_FOLDER || 'moyapropiedades').then((res) => ({
           url: res.url,
           publicId: res.publicId,
           order: index,

@@ -1,8 +1,9 @@
 import { UploadApiResponse } from 'cloudinary';
 import { cloudinary } from '../config/cloudinary.js';
+import { env } from '../config/env.js';
 
 export class UploadService {
-  static async uploadImage(fileBuffer: Buffer, folder: string = 'moyaprop/properties'): Promise<{ url: string; publicId: string }> {
+  static async uploadImage(fileBuffer: Buffer, folder: string = env.CLOUDINARY_FOLDER || 'moyapropiedades'): Promise<{ url: string; publicId: string }> {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
