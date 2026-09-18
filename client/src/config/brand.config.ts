@@ -52,7 +52,7 @@ export const brandConfig: BrandConfig = {
   agent: {
     name: 'Carlos Moya',
     title: 'Martillero y Corredor Inmobiliario',
-    photoUrl: '/carlos.jpeg'
+    photoUrl: '/carlos.webp'
   },
 
   license: {
