@@ -43,7 +43,7 @@ export interface BrandConfig {
 }
 
 export const brandConfig: BrandConfig = {
-  name: 'MoyaProp',
+  name: 'MoyaPropiedades',
   brandPrefix: 'MOYA',
   brandHighlight: ' Propiedades',
   logoUrl: '/logo.svg',

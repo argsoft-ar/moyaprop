@@ -7,7 +7,7 @@
 .hero {
   background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
   color: #ffffff;
-  padding: 85px 24px 65px;
+  padding: 105px 24px 85px;
   text-align: center;
 }
 
@@ -17,20 +17,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.heroBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(242, 101, 34, 0.15);
-  border: 1px solid rgba(242, 101, 34, 0.4);
-  color: #ff9d66;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin-bottom: 20px;
 }
 
 .heroTitle {

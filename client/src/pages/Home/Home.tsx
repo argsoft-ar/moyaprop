@@ -11,7 +11,6 @@ import { ValuesSection } from '../../components/sections/ValuesSection';
 import { ContactSection } from '../../components/sections/ContactSection/ContactSection';
 import { Pagination } from '../../components/ui';
 import { brandConfig } from '../../config/brand.config';
-import { Sparkles } from 'lucide-react';
 import styles from './Home.module.css';
 
 export const Home: React.FC = () => {
@@ -82,12 +81,8 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContainer}>
-          <div className={styles.heroBadge}>
-            <Sparkles size={16} />
-            <span>{brandConfig.name} • {brandConfig.slogan}</span>
-          </div>
           <h1 className={styles.heroTitle}>
-            Tu próximo hogar comienza con una decisión inteligente.
+            {brandConfig.slogan}
           </h1>
           <p className={styles.heroSubtitle}>
             Explora las mejores oportunidades de compra y alquiler con asesoramiento honesto, personalizado y transparente.
