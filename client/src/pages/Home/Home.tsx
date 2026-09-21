@@ -101,7 +101,7 @@ export const Home: React.FC = () => {
 
           <div className={styles.catalogHeader}>
             <h2 className={styles.sectionTitle}>
-              Catálogo de Propiedades ({meta.total})
+              Catálogo de Propiedades
             </h2>
             <span className={styles.liveIndicator}>Actualizado en tiempo real</span>
           </div>
