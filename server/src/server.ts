@@ -10,26 +10,35 @@ const app = express();
 app.set('trust proxy', 1);
 
 // Configuración de CORS segura
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Permitir peticiones sin origin (como apps móviles, Postman o curl)
-      if (!origin) return callback(null, true);
-      // Permitir localhost o cualquier subdominio de vercel.app
-      if (
-        origin === env.CLIENT_URL ||
-        origin.includes('localhost') ||
-        origin.endsWith('.vercel.app')
-      ) {
-        return callback(null, true);
-      }
-      return callback(new Error(`Origen no permitido por CORS: ${origin}`));
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  })
-);
+const isAllowedOrigin = (origin: string): boolean => {
+  // Permitir dominios de producción propios (con o sin www)
+  if (origin.includes('moyapropiedades.com.ar')) return true;
+  // Permitir Vercel (subdominios .vercel.app)
+  if (origin.endsWith('.vercel.app')) return true;
+  // Permitir desarrollo local
+  if (origin.includes('localhost') || origin.includes('127.0.0.1')) return true;
+  // Permitir orígenes definidos explícitamente en CLIENT_URL (soporta lista separada por comas)
+  const clientUrls = env.CLIENT_URL.split(',').map((url) => url.trim());
+  if (clientUrls.includes(origin)) return true;
+
+  return false;
+};
+
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Permitir peticiones sin origin (como apps móviles, Postman o curl)
+    if (!origin || isAllowedOrigin(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Parsers
 app.use(express.json({ limit: '10mb' }));
