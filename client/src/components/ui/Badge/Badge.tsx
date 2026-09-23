@@ -3,7 +3,7 @@ import styles from './Badge.module.css';
 
 export interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'active' | 'paused' | 'sold' | 'rented' | 'sale' | 'rent' | 'featured' | 'default';
+  variant?: 'active' | 'suspended' | 'reserved' | 'sold' | 'paused' | 'rented' | 'sale' | 'rent' | 'featured' | 'default';
   size?: 'sm' | 'md';
   className?: string;
 }

@@ -24,7 +24,7 @@ const formSchema = z.object({
   address: z.string().min(3, 'Dirección obligatoria'),
   city: z.string().min(2, 'Localidad obligatoria'),
   neighborhood: z.string().optional().nullable(),
-  status: z.enum(['ACTIVA', 'PAUSADA', 'VENDIDA', 'ALQUILADA']),
+  status: z.enum(['ACTIVA', 'SUSPENDIDA', 'RESERVADA', 'VENDIDA']),
   featured: z.boolean().default(false)
 });
 
@@ -240,10 +240,10 @@ export const PropertyForm: React.FC<PropertyFormProps> = ({
           <Select
             label="Estado de Publicación *"
             options={[
-              { value: 'ACTIVA', label: '🟢 Activa (Visible al público)' },
-              { value: 'PAUSADA', label: '🟡 Pausada (Oculta temporalmente)' },
-              { value: 'VENDIDA', label: '🟣 Vendida' },
-              { value: 'ALQUILADA', label: '🟣 Alquilada' }
+              { value: 'ACTIVA', label: 'Activo (Visible en catálogo)' },
+              { value: 'SUSPENDIDA', label: 'Suspendido (Visible con etiqueta)' },
+              { value: 'RESERVADA', label: 'Reservado (Visible con etiqueta)' },
+              { value: 'VENDIDA', label: 'Vendido (Oculto al público)' }
             ]}
             {...register('status')}
           />

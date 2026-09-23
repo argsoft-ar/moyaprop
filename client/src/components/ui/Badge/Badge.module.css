@@ -26,10 +26,17 @@
   border: 1px solid var(--status-active-border);
 }
 
+.suspended,
 .paused {
-  background-color: var(--status-paused-bg);
-  color: var(--status-paused-text);
-  border: 1px solid var(--status-paused-border);
+  background-color: var(--status-suspended-bg);
+  color: var(--status-suspended-text);
+  border: 1px solid var(--status-suspended-border);
+}
+
+.reserved {
+  background-color: var(--status-reserved-bg);
+  color: var(--status-reserved-text);
+  border: 1px solid var(--status-reserved-border);
 }
 
 .sold {

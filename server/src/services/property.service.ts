@@ -22,7 +22,9 @@ export class PropertyService {
     const skip = (page - 1) * limit;
 
     const where: Prisma.PropertyWhereInput = {
-      status: PropertyStatus.ACTIVA
+      status: {
+        in: [PropertyStatus.ACTIVA, PropertyStatus.SUSPENDIDA, PropertyStatus.RESERVADA]
+      }
     };
 
     if (operationType) where.operationType = operationType;
@@ -93,7 +95,13 @@ export class PropertyService {
       throw error;
     }
 
-    if (!includeAllStatus && property.status !== PropertyStatus.ACTIVA) {
+    const publicVisibleStatuses: PropertyStatus[] = [
+      PropertyStatus.ACTIVA,
+      PropertyStatus.SUSPENDIDA,
+      PropertyStatus.RESERVADA
+    ];
+
+    if (!includeAllStatus && !publicVisibleStatuses.includes(property.status)) {
       const error: any = new Error('Esta publicación ya no se encuentra disponible');
       error.statusCode = 404;
       throw error;
@@ -116,7 +124,15 @@ export class PropertyService {
       ];
     }
 
-    const [total, properties] = await Promise.all([
+    const [
+      total,
+      properties,
+      activeCount,
+      suspendedCount,
+      reservedCount,
+      soldCount,
+      allTotal
+    ] = await Promise.all([
       prisma.property.count({ where }),
       prisma.property.findMany({
         where,
@@ -128,7 +144,12 @@ export class PropertyService {
             orderBy: [{ isCover: 'desc' }, { order: 'asc' }]
           }
         }
-      })
+      }),
+      prisma.property.count({ where: { status: PropertyStatus.ACTIVA } }),
+      prisma.property.count({ where: { status: PropertyStatus.SUSPENDIDA } }),
+      prisma.property.count({ where: { status: PropertyStatus.RESERVADA } }),
+      prisma.property.count({ where: { status: PropertyStatus.VENDIDA } }),
+      prisma.property.count()
     ]);
 
     return {
@@ -137,7 +158,14 @@ export class PropertyService {
         total,
         page,
         limit,
-        totalPages: Math.ceil(total / limit)
+        totalPages: Math.ceil(total / limit),
+        counts: {
+          total: allTotal,
+          active: activeCount,
+          suspended: suspendedCount,
+          reserved: reservedCount,
+          sold: soldCount
+        }
       }
     };
   }

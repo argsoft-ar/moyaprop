@@ -41,6 +41,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                 <Sparkles size={12} /> Destacada
               </Badge>
             )}
+            {property.status === 'RESERVADA' && (
+              <Badge variant="reserved" size="sm">
+                Reservado
+              </Badge>
+            )}
+            {property.status === 'SUSPENDIDA' && (
+              <Badge variant="suspended" size="sm">
+                Suspendido
+              </Badge>
+            )}
           </div>
           <span className={styles.typeTag}>{property.propertyType}</span>
         </div>

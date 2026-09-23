@@ -19,7 +19,7 @@ export const ContactSection: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    reason: 'Comprar / Invertir',
+    reason: 'Necesito asesoramiento',
     message: ''
   });
 
@@ -131,7 +131,7 @@ export const ContactSection: React.FC = () => {
                         name: '',
                         email: '',
                         phone: '',
-                        reason: 'Comprar / Invertir',
+                        reason: 'Necesito asesoramiento',
                         message: ''
                       });
                     }}
@@ -171,11 +171,12 @@ export const ContactSection: React.FC = () => {
                     <Select
                       label="Motivo de la Consulta *"
                       options={[
-                        { value: 'Comprar / Invertir', label: 'Quiero comprar / invertir' },
-                        { value: 'Alquilar una propiedad', label: 'Quiero alquilar' },
-                        { value: 'Vender mi propiedad', label: 'Quiero vender mi propiedad' },
-                        { value: 'Solicitar Tasación', label: 'Solicitar tasación oficial' },
-                        { value: 'Otra consulta', label: 'Otra consulta general' }
+                        { value: 'Necesito asesoramiento', label: 'Necesito asesoramiento' },
+                        { value: 'Información por publicación', label: 'Información por publicación' },
+                        { value: 'Quiero comprar/vender', label: 'Quiero comprar/vender' },
+                        { value: 'Quiero alquilar mi propiedad', label: 'Quiero alquilar mi propiedad' },
+                        { value: 'Quiero tasar mi propiedad', label: 'Quiero tasar mi propiedad' },
+                        { value: 'Otro motivo', label: 'Otro motivo' }
                       ]}
                       value={formData.reason}
                       onChange={(e) => setFormData({ ...formData, reason: e.target.value })}

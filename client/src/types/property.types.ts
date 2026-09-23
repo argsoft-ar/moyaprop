@@ -13,7 +13,7 @@ export type PropertyType =
 
 export type Currency = 'USD' | 'ARS';
 
-export type PropertyStatus = 'ACTIVA' | 'PAUSADA' | 'VENDIDA' | 'ALQUILADA';
+export type PropertyStatus = 'ACTIVA' | 'SUSPENDIDA' | 'RESERVADA' | 'VENDIDA';
 
 export interface PropertyImage {
   id: string;
@@ -62,6 +62,14 @@ export interface PropertyFilters {
   limit?: number;
 }
 
+export interface PropertyStatusCounts {
+  total: number;
+  active: number;
+  suspended: number;
+  reserved: number;
+  sold: number;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   meta: {
@@ -69,5 +77,6 @@ export interface PaginatedResponse<T> {
     page: number;
     limit: number;
     totalPages: number;
+    counts?: PropertyStatusCounts;
   };
 }
