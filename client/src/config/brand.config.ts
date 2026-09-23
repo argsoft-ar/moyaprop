@@ -52,7 +52,7 @@ export const brandConfig: BrandConfig = {
   agent: {
     name: 'Dante Moya',
     title: 'Martillero y Corredor Público Inmobiliario',
-    photoUrl: 'https://res.cloudinary.com/dry6jcgfn/image/upload/v1789773827/carlos_paileh.webp'
+    photoUrl: 'https://res.cloudinary.com/dry6jcgfn/image/upload/v1790207489/carlos_paileh_xl73mm.webp'
   },
 
   license: {
