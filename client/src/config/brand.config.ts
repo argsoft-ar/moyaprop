@@ -70,13 +70,13 @@ export const brandConfig: BrandConfig = {
   },
 
   about: {
-    title: 'Nuestra trayectoria en el mercado inmobiliario',
+    title: 'Nuestra trayectoria',
     quote:
       '«Nuestra finalidad es brindar todas las alternativas posibles para culminar cualquier negocio inmobiliario con éxito, cumpliendo así, con las necesidades y exigencias de cada uno de nuestros clientes.»',
     paragraph1:
-      'Somos una joven empresa familiar, con una vasta experiencia en el mercado inmobiliario, habiendo formado parte en su momento, del staff de ventas de una de las más reconocidas empresas inmobiliarias de la zona sur del gran Buenos Aires.',
+      'Somos una joven empresa familiar, con una vasta experiencia en el mercado inmobiliario, habiendo formado en su momento, parte del staff de ventas de una de las más reconocidas empresas inmobiliarias de la zona sur del gran Buenos Aires.',
     paragraph2:
-      'Estamos para asesorarlo y acompañarlo en cada uno de los procesos del negocio inmobiliario, comprendiendo el valor trascendental que tiene tomar la decisión de adquirir su ansiada vivienda o la de realizar la mejor inversión para resguardar sus ahorros.'
+      'Estamos para asesorarte y acompañarte en cada uno de los procesos del negocio inmobiliario, comprendiendo el valor trascendental que tiene tomar la decisión de adquirir tu tan ansiada vivienda o la de realizar la mejor inversión para resguardar tus ahorros.'
   },
 
   legal: {

@@ -32,9 +32,9 @@ enum Currency {
 
 enum PropertyStatus {
   ACTIVA
-  PAUSADA
+  SUSPENDIDA
+  RESERVADA
   VENDIDA
-  ALQUILADA
 }
 
 model AdminUser {

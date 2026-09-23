@@ -2,7 +2,7 @@ import React from 'react';
 import { Edit2, Trash2, ExternalLink } from 'lucide-react';
 import { Property, PropertyStatus } from '../../../../types/property.types';
 import { formatPrice } from '../../../../utils/formatters';
-import { Badge, EmptyState } from '../../../../components/ui';
+import { EmptyState } from '../../../../components/ui';
 import styles from './PropertyTable.module.css';
 
 interface PropertyTableProps {
@@ -32,11 +32,9 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Inmueble</th>
-            <th>Operación / Tipo</th>
-            <th>Precio</th>
-            <th>Ubicación</th>
-            <th>Estado (1-Clic)</th>
+            <th className={styles.thProperty}>Inmueble</th>
+            <th className={styles.thPrice}>Precio</th>
+            <th className={styles.thStatus}>Estado (1-Clic)</th>
             <th className={styles.actionsHeader}>Acciones</th>
           </tr>
         </thead>
@@ -46,7 +44,7 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
 
             return (
               <tr key={p.id}>
-                <td>
+                <td className={styles.propertyCol}>
                   <div className={styles.propertyCell}>
                     <div className={styles.thumbWrapper}>
                       {cover ? (
@@ -57,68 +55,58 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
                     </div>
                     <div className={styles.infoWrapper}>
                       <span className={styles.title} title={p.title}>{p.title}</span>
-                      <span className={styles.metaText}>{p.bedrooms} dorm. • {p.totalArea} m²</span>
+                      <span className={styles.addressText} title={`${p.address}${p.city ? ` - ${p.city}` : ''}`}>
+                        {p.address}{p.city ? ` - ${p.city}` : ''}
+                      </span>
                     </div>
                   </div>
                 </td>
 
-                <td>
-                  <div className={styles.tagGroup}>
-                    <Badge variant={p.operationType === 'VENTA' ? 'sale' : 'rent'} size="sm">
-                      {p.operationType}
-                    </Badge>
-                    <span className={styles.typeText}>{p.propertyType}</span>
-                  </div>
-                </td>
-
                 <td className={styles.priceCol}>
-                  <strong>{formatPrice(p.price, p.currency)}</strong>
+                  <span className={styles.priceValue}>{formatPrice(p.price, p.currency)}</span>
                 </td>
 
-                <td>
-                  <div className={styles.locationCell}>
-                    <span>{p.city}</span>
-                    <small className={styles.addressText}>{p.address}</small>
-                  </div>
-                </td>
-
-                <td>
+                <td className={styles.statusCol}>
                   <select
                     className={`${styles.statusSelect} ${styles[`status_${p.status}`]}`}
                     value={p.status}
                     onChange={(e) => onStatusChange(p.id, e.target.value as PropertyStatus)}
+                    aria-label={`Cambiar estado de ${p.title}`}
                   >
-                    <option value="ACTIVA">🟢 Activa</option>
-                    <option value="PAUSADA">🟡 Pausada</option>
-                    <option value="VENDIDA">🟣 Vendida</option>
-                    <option value="ALQUILADA">🟣 Alquilada</option>
+                    <option value="ACTIVA">Activo</option>
+                    <option value="SUSPENDIDA">Suspendido</option>
+                    <option value="RESERVADA">Reservado</option>
+                    <option value="VENDIDA">Vendido</option>
                   </select>
                 </td>
 
-                <td>
+                <td className={styles.actionsCol}>
                   <div className={styles.actionsCell}>
                     <a
                       href={`/propiedad/${p.id}`}
                       target="_blank"
                       rel="noreferrer"
-                      className={styles.actionBtn}
+                      className={`${styles.actionBtn} ${styles.viewBtn}`}
                       title="Ver en web pública"
+                      aria-label="Ver propiedad"
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={18} />
                     </a>
                     <button
-                      className={styles.actionBtn}
+                      className={`${styles.actionBtn} ${styles.editBtn}`}
                       onClick={() => onEdit(p)}
                       title="Editar propiedad"
+                      aria-label="Editar propiedad"
                     >
-                      <Edit2 size={16} />
+                      <Edit2 size={18} />
                     </button>
                     <button
                       className={`${styles.actionBtn} ${styles.deleteBtn}`}
                       onClick={() => onDelete(p.id, p.title)}
                       title="Eliminar propiedad"
+                      aria-label="Eliminar propiedad"
                     >
-                      <Trash2 size={16} />
+                      <Trash2 size={18} />
                     </button>
                   </div>
                 </td>

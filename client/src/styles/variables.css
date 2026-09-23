@@ -45,17 +45,20 @@
   --status-active-text: #047857;
   --status-active-border: #a7f3d0;
 
+  --status-suspended-bg: #fffbeb;
+  --status-suspended-text: #b45309;
+  --status-suspended-border: #fde68a;
   --status-paused-bg: #fffbeb;
   --status-paused-text: #b45309;
   --status-paused-border: #fde68a;
 
-  --status-sold-bg: #f5f3ff;
-  --status-sold-text: #6d28d9;
-  --status-sold-border: #ddd6fe;
+  --status-reserved-bg: #f0f9ff;
+  --status-reserved-text: #0284c7;
+  --status-reserved-border: #7dd3fc;
 
-  --status-rented-bg: #fdf2f8;
-  --status-rented-text: #be185d;
-  --status-rented-border: #fbcfe8;
+  --status-sold-bg: #fef2f2;
+  --status-sold-text: #dc2626;
+  --status-sold-border: #fecaca;
 
   /* Feedback / Alertas */
   --color-success: #10b981;

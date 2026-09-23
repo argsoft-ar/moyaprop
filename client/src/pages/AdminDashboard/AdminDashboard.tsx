@@ -14,6 +14,13 @@ export const AdminDashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [meta, setMeta] = useState({ total: 0, totalPages: 1 });
+  const [counts, setCounts] = useState({
+    total: 0,
+    active: 0,
+    suspended: 0,
+    reserved: 0,
+    sold: 0
+  });
 
   // Diálogo de Confirmación de Borrado
   const [propertyToDelete, setPropertyToDelete] = useState<{ id: string; title: string } | null>(null);
@@ -30,6 +37,9 @@ export const AdminDashboard: React.FC = () => {
         total: result.meta.total,
         totalPages: result.meta.totalPages
       });
+      if (result.meta.counts) {
+        setCounts(result.meta.counts);
+      }
     } catch (error) {
       console.error('Error cargando inventario:', error);
     } finally {
@@ -54,6 +64,7 @@ export const AdminDashboard: React.FC = () => {
         prev.map((p) => (p.id === id ? { ...p, status: newStatus } : p))
       );
       await adminService.updateStatus(id, newStatus);
+      loadProperties();
     } catch (error) {
       console.error('Error al cambiar estado:', error);
       loadProperties(); // Revertir si falló
@@ -78,11 +89,6 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Contadores para métricas
-  const countActive = properties.filter((p) => p.status === 'ACTIVA').length;
-  const countPaused = properties.filter((p) => p.status === 'PAUSADA').length;
-  const countClosed = properties.filter((p) => p.status === 'VENDIDA' || p.status === 'ALQUILADA').length;
-
   return (
     <div className={styles.container}>
       {/* Cabecera con Botón de Acción Principal */}
@@ -104,10 +110,11 @@ export const AdminDashboard: React.FC = () => {
 
       {/* Tarjetas de Métricas Rápidas */}
       <div className={styles.statsGrid}>
-        <StatCard label="Total en Catálogo" value={meta.total} />
-        <StatCard label="Activas (Públicas)" value={countActive} variant="active" />
-        <StatCard label="Pausadas (Ocultas)" value={countPaused} variant="paused" />
-        <StatCard label="Vendidas / Alquiladas" value={countClosed} variant="closed" />
+        <StatCard label="Total Catálogo" value={counts.total || meta.total} />
+        <StatCard label="Activos" value={counts.active} variant="active" />
+        <StatCard label="Suspendidos" value={counts.suspended} variant="suspended" />
+        <StatCard label="Reservados" value={counts.reserved} variant="reserved" />
+        <StatCard label="Vendidos" value={counts.sold} variant="sold" />
       </div>
 
       {/* Barra de Filtros Rápidos */}
@@ -123,31 +130,22 @@ export const AdminDashboard: React.FC = () => {
           />
         </form>
 
-        <div className={styles.statusFilters}>
-          <button
-            className={`${styles.filterChip} ${!selectedStatus ? styles.activeChip : ''}`}
-            onClick={() => { setSelectedStatus(undefined); setPage(1); }}
+        <div className={styles.selectWrapper}>
+          <select
+            className={styles.statusSelectFilter}
+            value={selectedStatus || ''}
+            onChange={(e) => {
+              setSelectedStatus(e.target.value ? (e.target.value as PropertyStatus) : undefined);
+              setPage(1);
+            }}
+            aria-label="Filtrar por estado"
           >
-            Todos
-          </button>
-          <button
-            className={`${styles.filterChip} ${selectedStatus === 'ACTIVA' ? styles.activeChip : ''}`}
-            onClick={() => { setSelectedStatus('ACTIVA'); setPage(1); }}
-          >
-            🟢 Activas
-          </button>
-          <button
-            className={`${styles.filterChip} ${selectedStatus === 'PAUSADA' ? styles.activeChip : ''}`}
-            onClick={() => { setSelectedStatus('PAUSADA'); setPage(1); }}
-          >
-            🟡 Pausadas
-          </button>
-          <button
-            className={`${styles.filterChip} ${selectedStatus === 'VENDIDA' ? styles.activeChip : ''}`}
-            onClick={() => { setSelectedStatus('VENDIDA'); setPage(1); }}
-          >
-            🟣 Vendidas
-          </button>
+            <option value="">Todos los estados</option>
+            <option value="ACTIVA">Activo</option>
+            <option value="SUSPENDIDA">Suspendido</option>
+            <option value="RESERVADA">Reservado</option>
+            <option value="VENDIDA">Vendido</option>
+          </select>
         </div>
       </div>
 

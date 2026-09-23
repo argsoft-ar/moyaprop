@@ -4,7 +4,7 @@ import styles from './StatCard.module.css';
 export interface StatCardProps {
   label: string;
   value: number | string;
-  variant?: 'default' | 'active' | 'paused' | 'closed';
+  variant?: 'default' | 'active' | 'suspended' | 'reserved' | 'sold' | 'paused' | 'closed';
   className?: string;
 }
 

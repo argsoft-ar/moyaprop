@@ -287,29 +287,40 @@ async function runSuite() {
     );
 
     await runTest(
-      'PATCH /api/properties/:id/status (Admin pausa inmueble -> 200)',
+      'PATCH /api/properties/:id/status (Admin suspende inmueble -> 200)',
       200,
       () =>
         request('PATCH', `/api/properties/${createdPropertyId}/status`, {
           token: authToken,
-          body: { status: 'PAUSADA' }
+          body: { status: 'SUSPENDIDA' }
         }),
-      (body) => body.data.status === 'PAUSADA'
+      (body) => body.data.status === 'SUSPENDIDA'
     );
 
-    // Debe desaparecer del catálogo público de activas
+    // Inmueble vendido no accesible públicamente
     await runTest(
-      'GET /api/properties/:id (Inmueble pausado no accesible públicamente -> 404)',
+      'PATCH /api/properties/:id/status (Admin marca inmueble vendido -> 200)',
+      200,
+      () =>
+        request('PATCH', `/api/properties/${createdPropertyId}/status`, {
+          token: authToken,
+          body: { status: 'VENDIDA' }
+        }),
+      (body) => body.data.status === 'VENDIDA'
+    );
+
+    await runTest(
+      'GET /api/properties/:id (Inmueble vendido no accesible públicamente -> 404)',
       404,
       () => request('GET', `/api/properties/${createdPropertyId}`)
     );
 
     // Pero sí accesible en el admin
     await runTest(
-      'GET /api/properties/admin/:id (Inmueble pausado accesible en admin -> 200)',
+      'GET /api/properties/admin/:id (Inmueble vendido accesible en admin -> 200)',
       200,
       () => request('GET', `/api/properties/admin/${createdPropertyId}`, { token: authToken }),
-      (body) => body.data.status === 'PAUSADA'
+      (body) => body.data.status === 'VENDIDA'
     );
 
     await runTest(

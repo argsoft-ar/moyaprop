@@ -125,6 +125,12 @@ export const PropertyDetail: React.FC = () => {
               {property.featured && (
                 <Badge variant="featured">Destacada</Badge>
               )}
+              {property.status === 'RESERVADA' && (
+                <Badge variant="reserved">Reservado</Badge>
+              )}
+              {property.status === 'SUSPENDIDA' && (
+                <Badge variant="suspended">Suspendido</Badge>
+              )}
             </div>
 
             <h1 className={styles.title}>{property.title}</h1>
