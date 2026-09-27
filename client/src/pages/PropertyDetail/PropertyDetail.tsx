@@ -149,6 +149,11 @@ export const PropertyDetail: React.FC = () => {
               {/* Galería de Fotografías */}
               <PropertyGallery images={property.images} title={property.title} />
 
+              {/* Tarjeta de Precio y Contacto Rápido en Mobile (justo bajo la galería) */}
+              <div className={styles.mobileContactWrapper}>
+                <PropertyContactCard property={property} whatsappUrl={whatsappUrl} />
+              </div>
+
               {/* Ficha Técnica Rápida */}
               <PropertySpecs property={property} />
 
@@ -174,7 +179,7 @@ export const PropertyDetail: React.FC = () => {
               <LegalDisclaimer />
             </div>
 
-            {/* Columna Derecha: Tarjeta de Precio y Contacto Fijo */}
+            {/* Columna Derecha: Tarjeta de Precio y Contacto Fijo (Desktop) */}
             <div className={styles.rightCol}>
               <PropertyContactCard property={property} whatsappUrl={whatsappUrl} />
             </div>

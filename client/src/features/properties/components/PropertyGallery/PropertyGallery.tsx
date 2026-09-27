@@ -10,6 +10,8 @@ interface PropertyGalleryProps {
 
 export const PropertyGallery: React.FC<PropertyGalleryProps> = ({ images, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   if (!images || images.length === 0) {
     return (
@@ -22,29 +24,61 @@ export const PropertyGallery: React.FC<PropertyGalleryProps> = ({ images, title 
 
   const activeImage = images[currentIndex];
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  // Soporte para gestos táctiles (Swipe) en mobile
+  const minSwipeDistance = 45;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      handleNext();
+    } else if (isRightSwipe) {
+      handlePrev();
+    }
   };
 
   return (
     <div className={styles.container}>
-      {/* Visor Principal */}
-      <div className={styles.mainViewer}>
+      {/* Visor Principal con Soporte Táctil */}
+      <div
+        className={styles.mainViewer}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <img
           src={activeImage.url}
           alt={`${title} - Foto ${currentIndex + 1}`}
           className={styles.mainImage}
+          loading="eager"
         />
 
         {images.length > 1 && (
           <>
             <button
+              type="button"
               className={`${styles.navButton} ${styles.prevButton}`}
               onClick={handlePrev}
               aria-label="Foto anterior"
@@ -52,6 +86,7 @@ export const PropertyGallery: React.FC<PropertyGalleryProps> = ({ images, title 
               <ChevronLeft size={24} />
             </button>
             <button
+              type="button"
               className={`${styles.navButton} ${styles.nextButton}`}
               onClick={handleNext}
               aria-label="Foto siguiente"

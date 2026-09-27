@@ -97,3 +97,25 @@
 .metaRow strong {
   color: var(--text-main);
 }
+
+@media (max-width: 640px) {
+  .stickyCard {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .priceNumber {
+    font-size: 1.85rem;
+    word-break: break-word;
+  }
+
+  .contactActionBox {
+    padding: 16px 14px;
+    gap: 12px;
+  }
+
+  .whatsappActionBtn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+}
