@@ -4,6 +4,8 @@
   padding: 28px;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
+  width: 100%;
+  min-width: 0;
 }
 
 .boxTitle {
@@ -19,12 +21,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  width: 100%;
+  min-width: 0;
 }
 
 .specItem {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .specIcon {
@@ -35,6 +40,7 @@
 .specTexts {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .specLabel {
@@ -47,11 +53,30 @@
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 640px) {
+  .specsBox {
+    padding: 20px 16px;
+  }
+
+  .boxTitle {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
   .specsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .specsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }

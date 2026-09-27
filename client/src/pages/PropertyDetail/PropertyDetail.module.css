@@ -12,13 +12,17 @@
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .topBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .backLink {
@@ -96,6 +100,7 @@
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .title {
@@ -104,6 +109,8 @@
   color: var(--color-primary);
   line-height: 1.2;
   margin-bottom: 10px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .location {
@@ -112,10 +119,12 @@
   gap: 8px;
   color: var(--text-secondary);
   font-size: 1rem;
+  word-break: break-word;
 }
 
 .locationIcon {
   color: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .layoutGrid {
@@ -123,12 +132,20 @@
   grid-template-columns: 2fr 1fr;
   gap: 36px;
   align-items: start;
+  width: 100%;
+  min-width: 0;
 }
 
 .leftCol {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
+  min-width: 0;
+}
+
+.mobileContactWrapper {
+  display: none;
 }
 
 .descriptionBox {
@@ -137,6 +154,8 @@
   padding: 28px;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
+  width: 100%;
+  min-width: 0;
 }
 
 .boxTitle {
@@ -155,11 +174,14 @@
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-secondary);
+  word-break: break-word;
 }
 
 .rightCol {
   position: sticky;
   top: 90px;
+  width: 100%;
+  min-width: 0;
 }
 
 .loadingWrapper {
@@ -193,11 +215,74 @@
 @media (max-width: 900px) {
   .layoutGrid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
-  .specsGrid {
-    grid-template-columns: repeat(2, 1fr);
+
+  .leftCol {
+    gap: 24px;
   }
+
+  /* En móviles/tablets, mostramos el contacto debajo de la galería y ocultamos la columna derecha redundante */
+  .mobileContactWrapper {
+    display: block;
+    width: 100%;
+  }
+
   .rightCol {
-    position: static;
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 16px 16px 40px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .descriptionBox {
+    padding: 20px 16px;
+  }
+
+  .boxTitle {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .descriptionText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 12px 12px 36px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .location {
+    font-size: 0.9rem;
+  }
+
+  .topActionsGroup {
+    width: 100%;
+  }
+
+  .printActionBtn,
+  .shareWhatsAppBtn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
 }
