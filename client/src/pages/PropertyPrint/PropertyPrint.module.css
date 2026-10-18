@@ -86,7 +86,7 @@
   min-height: 1140px; /* Proporción estándar de hoja A4 en pantalla para mantener el espacio sobrante */
   margin: 24px auto 0;
   background-color: #ffffff;
-  padding: 36px 40px;
+  padding: 44px 58px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
@@ -417,10 +417,10 @@
   }
 
   .sheetContainer {
-    margin: 12px 12px 0;
+    margin: 12px 14px 0;
     width: auto;
     max-width: 100%;
-    padding: 20px 16px;
+    padding: 24px 24px;
     min-height: auto;
     border-radius: 8px;
     gap: 14px;
@@ -488,7 +488,7 @@
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 12mm;
+    margin: 12mm 16mm;
   }
 
   body {
@@ -509,9 +509,10 @@
   .sheetContainer {
     max-width: 100% !important;
     width: 100% !important;
-    min-height: 270mm !important; /* Altura completa de la hoja A4 para preservar el espacio sobrante */
+    min-height: 265mm !important; /* Altura completa de la hoja A4 para preservar el espacio sobrante */
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 4mm 8mm !important;
+    box-sizing: border-box !important;
     border: none !important;
     box-shadow: none !important;
     gap: 14px !important;

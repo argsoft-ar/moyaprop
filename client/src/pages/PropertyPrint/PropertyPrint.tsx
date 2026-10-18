@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { propertyService } from '../../features/properties/services/propertyService';
+import { adminService } from '../../features/admin/services/adminService';
 import { Property } from '../../types/property.types';
 import { formatPrice, formatArea } from '../../utils/formatters';
 import { brandConfig } from '../../config/brand.config';
@@ -20,7 +20,7 @@ export const PropertyPrint: React.FC = () => {
       if (!id) return;
       setIsLoading(true);
       try {
-        const data = await propertyService.getPropertyById(id);
+        const data = await adminService.getPropertyById(id);
         setProperty(data);
       } catch (err: any) {
         setError(err.response?.data?.message || 'No se pudo cargar la propiedad para imprimir');
@@ -50,7 +50,7 @@ export const PropertyPrint: React.FC = () => {
       <EmptyState
         title="No pudimos generar la ficha"
         description={error || 'La propiedad solicitada no se encuentra disponible.'}
-        backLink={{ to: '/', label: 'Volver al catálogo principal' }}
+        backLink={{ to: '/admin', label: 'Volver al panel de administración' }}
       />
     );
   }
@@ -77,10 +77,10 @@ export const PropertyPrint: React.FC = () => {
             <button
               type="button"
               className={styles.backBtn}
-              onClick={() => navigate(`/propiedad/${property.id}`)}
+              onClick={() => navigate('/admin')}
             >
               <ArrowLeft size={16} />
-              <span>Volver a la publicación</span>
+              <span>Volver al panel</span>
             </button>
 
             <button
@@ -121,7 +121,6 @@ export const PropertyPrint: React.FC = () => {
           </div>
 
           <div className={styles.contactCol}>
-            <span className={styles.contactAgent}>{brandConfig.agent.name} • {brandConfig.agent.title}</span>
             <span>Tel / WhatsApp: {brandConfig.contact.phone}</span>
             <span>Email: {brandConfig.contact.email}</span>
             <span>{brandConfig.contact.location}</span>
