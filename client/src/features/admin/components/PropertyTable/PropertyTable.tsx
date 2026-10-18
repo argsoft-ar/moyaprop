@@ -1,5 +1,5 @@
 import React from 'react';
-import { Edit2, Trash2, ExternalLink } from 'lucide-react';
+import { Edit2, Trash2, ExternalLink, Printer } from 'lucide-react';
 import { Property, PropertyStatus } from '../../../../types/property.types';
 import { formatPrice } from '../../../../utils/formatters';
 import { EmptyState } from '../../../../components/ui';
@@ -91,6 +91,16 @@ export const PropertyTable: React.FC<PropertyTableProps> = ({
                       aria-label="Ver propiedad"
                     >
                       <ExternalLink size={18} />
+                    </a>
+                    <a
+                      href={`/admin/imprimir/${p.id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`${styles.actionBtn} ${styles.printBtn}`}
+                      title="Imprimir ficha A4 / PDF"
+                      aria-label="Imprimir ficha"
+                    >
+                      <Printer size={18} />
                     </a>
                     <button
                       className={`${styles.actionBtn} ${styles.editBtn}`}

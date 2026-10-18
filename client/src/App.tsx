@@ -31,13 +31,13 @@ export const App: React.FC = () => {
           {/* Rutas Públicas */}
           <Route path="/" element={<Home />} />
           <Route path="/propiedad/:id" element={<PropertyDetail />} />
-          <Route path="/propiedad/:id/imprimir" element={<PropertyPrint />} />
 
           {/* Autenticación Panel Moya */}
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Rutas Protegidas del Panel de Administración */}
           <Route element={<ProtectedRoute />}>
+            <Route path="/admin/imprimir/:id" element={<PropertyPrint />} />
             <Route element={<AdminLayout />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/nueva" element={<AdminPropertyCreate />} />

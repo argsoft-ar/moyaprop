@@ -202,6 +202,17 @@
   color: #0f172a;
 }
 
+.printBtn {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border-color: #fed7aa;
+}
+
+.printBtn:hover {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
 .editBtn {
   background-color: #eff6ff;
   color: #2563eb;

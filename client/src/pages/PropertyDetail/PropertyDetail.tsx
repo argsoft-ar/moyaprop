@@ -11,7 +11,7 @@ import { Footer } from '../../components/layout/Footer/Footer';
 import { Spinner, Badge, EmptyState, LegalDisclaimer } from '../../components/ui';
 import { formatPrice, buildWhatsAppUrl } from '../../utils/formatters';
 import { brandConfig } from '../../config/brand.config';
-import { MapPin, MessageCircle, ArrowLeft, Printer } from 'lucide-react';
+import { MapPin, MessageCircle, ArrowLeft } from 'lucide-react';
 import styles from './PropertyDetail.module.css';
 
 export const PropertyDetail: React.FC = () => {
@@ -89,17 +89,6 @@ export const PropertyDetail: React.FC = () => {
             </Link>
 
             <div className={styles.topActionsGroup}>
-              <Link
-                to={`/propiedad/${property.id}/imprimir`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.printActionBtn}
-                title="Abrir ficha resumida para imprimir o guardar en PDF"
-              >
-                <Printer size={17} />
-                <span>Imprimir Ficha</span>
-              </Link>
-
               <a
                 href={shareWhatsAppUrl}
                 target="_blank"
